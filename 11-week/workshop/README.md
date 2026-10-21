@@ -9,5 +9,5 @@ Part owned by me: Catalog & Showtimes (`csp-catalog-api`, `csp-catalog-db`, `csp
 - TEAM: cinesync-platform (Group 1)
 - DOCS_REPO: https://github.com/code-corhuila/csp-docs
 - REFLECTION_DOC: (pending)
-- JOURNEY: (written in CP1)
+- JOURNEY: Schedule and publish a showtime (portal -> api-gateway -> catalog-service -> MongoDB outbox -> csp-worker -> RabbitMQ)
 <!-- CONFIG-END -->
