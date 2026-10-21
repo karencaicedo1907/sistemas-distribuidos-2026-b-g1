@@ -18,6 +18,7 @@
 | HU-FE-CONCESSIONS-001 | Promote the Concessions portal to main and publish release 2.0.0 | done | PR #48 by `Oscarsl10` (merge `e06395c`), tag `v2.0.0` published 11 Oct; my base scaffold = PRs #1–#5 |
 | HU-UI-001 / HU-UI-002 | Billboard branding and detail/seat-map flows included in the 2.0.0 release | done | Included in `release/2.0.0` promoted by PR #55 |
 | W11-WORKSHOP | Observability workshop, delivery 1: journey, log contract, instrumentation and metric catalog | done | `11-week/workshop/` commits listed in section 2.8 |
+| W11-WORKSHOP-D2 | Observability workshop, delivery 2: SLOs, burn-rate alerts, runbook, incident drill and post-mortem | done | `11-week/workshop/` commits listed in section 2.9 |
 
 ## 2. My individual contribution
 
@@ -116,6 +117,19 @@ Individual observability workshop on the journey "schedule and publish a showtim
 | CP4 | [`0616fcd`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/0616fcd) | docs(w11): define golden signals and metric catalog | `04-metrics.md`: golden signals, cardinality, buckets |
 
 Test result in `03-instrumentation`: 5 checks, 5 passed, 0 failed (plain Java 21, Maven is not installed on this machine).
+
+### 2.9 Workshop W11 - delivery 2 (CP6 to CP10)
+
+Same journey as delivery 1 (schedule and publish a showtime). Work is in `11-week/workshop/`.
+
+| Checkpoint | Commit | Message | Content |
+|---|---|---|---|
+| CP6 | [`66f92d6`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/66f92d6) | docs(w11): define SLOs and error budget | `05-slo.md`: three SLOs, budget in requests and minutes, policy at 50/75/100 % |
+| CP7 | [`c1e45d4`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/c1e45d4) | feat(w11): add burn-rate alerting rules | `06-alerts.yml` (checked with `promtool`: 2 rules found) and `06-alert-policy.md` |
+| CP8 | [`a0bfd02`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/a0bfd02) | docs(w11): write runbook for fast-burn alert | `07-runbook.md`: confirm, three mitigations, escalation, recovery |
+| CP9 | [`d756c76`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/d756c76) | docs(w11): run incident drill and postmortem | `08-incident.md`: trace, four log lines, SLIs, timeline, impact, three actions |
+
+Validation: `promtool check rules 06-alerts.yml` reported `SUCCESS: 2 rules found`. The incident drill is simulated: its alert times come from a minute-by-minute model of the traffic in `05-slo.md`. The implementation plan for my project is in the reflection document.
 
 ## 3. Blockers and risks
 
