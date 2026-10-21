@@ -17,6 +17,7 @@
 | HU-FE-CATALOG-001 | Release the CineSync catalog portal as 2.0.0 and close the release train (changelog, dev port, compose, CORS, 2.0.1 hotfix) | done | PR #55 (release/2.0.0 -> main), PRs #56–#63 and #65; issue #6 closed 13 Oct; tags `v2.0.0` and `v2.0.1` |
 | HU-FE-CONCESSIONS-001 | Promote the Concessions portal to main and publish release 2.0.0 | done | PR #48 by `Oscarsl10` (merge `e06395c`), tag `v2.0.0` published 11 Oct; my base scaffold = PRs #1–#5 |
 | HU-UI-001 / HU-UI-002 | Billboard branding and detail/seat-map flows included in the 2.0.0 release | done | Included in `release/2.0.0` promoted by PR #55 |
+| W11-WORKSHOP | Observability workshop, delivery 1: journey, log contract, instrumentation and metric catalog | done | `11-week/workshop/` commits listed in section 2.8 |
 
 ## 2. My individual contribution
 
@@ -99,6 +100,22 @@ Branch totals for Week 11: **develop 10 · qa 9 · main 5 = 24** (13 of them che
 - **Release 2.0.1:** changelog closed for 2.0.1 (#62/#63) and `release/2.0.1` promoted to `main` (#65) -> tag **`v2.0.1`** (13 Oct), closing the deploy/CORS hotfix train.
 - **Concessions:** release **`v2.0.0`** published 11 Oct through promotion PR #48 by `Oscarsl10`; no commits or PRs by me in the window — my governance/federation/runtime/domain/CI scaffold (PRs #1–#5) is part of the released baseline.
 - **Docs:** no commits or PRs by me in Week 11 (last one: `d7e98b9`, 08 Oct). Teammates recorded the release-related status updates, e.g. `3b0f909` "mark the four Booking stories as done in main" and `42fc9d5` "update the status of the Auth and Concessions stories" (Yeferson, 11 Oct).
+
+### 2.8 Workshop W11 - delivery 1 (CP0 to CP4)
+
+Individual observability workshop on the journey "schedule and publish a showtime" (`api-gateway` -> `catalog-service` -> MongoDB `outbox_event` -> `csp-worker` -> RabbitMQ). Work is in `11-week/workshop/`.
+
+| Checkpoint | Commit | Message | Content |
+|---|---|---|---|
+| CP0 | [`0614a73`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/0614a73) | docs(w11): start observability workshop | workshop README with CONFIG |
+| CP0 | [`9b2a886`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/9b2a886) | docs(w11): add reflection document link to workshop readme | README fix: full name and reflection document |
+| CP1 | [`e79fbb6`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/e79fbb6) | docs(w11): map critical journey and trace propagation | `01-journey.md`: showtime publication journey, Mermaid, span tree |
+| CP2 | [`27c1f61`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/27c1f61) | docs(w11): define structured log contract | `02-log-contract.md`: fields, never-log list, seven log lines, levels |
+| CP3 | [`8d87764`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/8d87764) | feat(w11): add trace-context middleware and structured logger | `TraceContext`, `TraceContextMiddleware`, `StructuredLogger` |
+| CP3 | [`55b07d6`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/55b07d6) | feat(w11): propagate context downstream and expose metrics | `OutboxEventFactory`, `RequestMetrics`, test (5 passed), `HOW-TO-RUN.md` |
+| CP4 | [`0616fcd`](https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/commit/0616fcd) | docs(w11): define golden signals and metric catalog | `04-metrics.md`: golden signals, cardinality, buckets |
+
+Test result in `03-instrumentation`: 5 checks, 5 passed, 0 failed (plain Java 21, Maven is not installed on this machine).
 
 ## 3. Blockers and risks
 
