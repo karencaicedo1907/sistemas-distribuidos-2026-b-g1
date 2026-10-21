@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img"
+     aria-label="El árbol de trabajo: seis directorios hermanos bajo la raíz del espacio de trabajo; tres se despliegan y tres no entran en el compose; solo la página pública tiene historia propia."
+     font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif">
+  <title>El árbol de trabajo del proyecto</title>
+  <desc>Seis directorios hermanos, su papel y si su contenido está confirmado.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+      <path class="ah" d="M0,0 L9,3.5 L0,7 z" fill="#475569"/>
+    </marker>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .card { fill: #0b1220; stroke: #1e293b; }
+        .box  { fill: #172033; stroke: #475569; }
+        .focus{ fill: #0c3a52; stroke: #38bdf8; }
+        .t    { fill: #e2e8f0; }
+        .s    { fill: #94a3b8; }
+        .lbl  { fill: #cbd5e1; }
+        .edge { stroke: #94a3b8; }
+        .sep  { stroke: #475569; }
+        .ah   { fill: #94a3b8; }
+      }
+    </style>
+  </defs>
+
+  <rect class="card" x="0.5" y="0.5" width="999" height="499" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <rect class="focus" x="300" y="18" width="400" height="60" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="500" y="42" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">C:\www\simple-stock-flow\</text>
+  <text class="s" x="500" y="63" text-anchor="middle" fill="#475569" font-size="10">CLAUDE.md · el contexto que comparten los seis</text>
+
+  <text class="s" x="500" y="96" text-anchor="middle" fill="#475569" font-size="10">los seis directorios llevan el prefijo simple-stock-flow-</text>
+
+  <polyline class="edge" points="500,100 500,118" fill="none" stroke="#475569" stroke-width="1.5"/>
+  <line class="edge" x1="92" y1="118" x2="912" y2="118" stroke="#475569" stroke-width="1.5"/>
+  <line class="edge" x1="92" y1="118" x2="92" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="256" y1="118" x2="256" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="420" y1="118" x2="420" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="584" y1="118" x2="584" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="748" y1="118" x2="748" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="912" y1="118" x2="912" y2="150" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect class="focus" x="18" y="154" width="148" height="148" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="92" y="180" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">infra</text>
+  <text class="s" x="92" y="201" text-anchor="middle" fill="#475569" font-size="9.5">compose · .env</text>
+  <text class="s" x="92" y="215" text-anchor="middle" fill="#475569" font-size="9.5">verify.sh</text>
+  <line class="sep" x1="38" y1="232" x2="146" y2="232" stroke="#cbd5e1"/>
+  <text class="t" x="92" y="253" text-anchor="middle" fill="#0f172a" font-size="10.5" font-weight="600">sin confirmar</text>
+  <text class="s" x="92" y="272" text-anchor="middle" fill="#475569" font-size="9">construye las imágenes</text>
+  <text class="s" x="92" y="291" text-anchor="middle" fill="#0369a1" font-size="9" font-weight="600">se despliega</text>
+
+  <rect class="focus" x="182" y="154" width="148" height="148" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="256" y="180" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">api</text>
+  <text class="s" x="256" y="201" text-anchor="middle" fill="#475569" font-size="9.5">.NET 8 · el hexágono</text>
+  <text class="s" x="256" y="215" text-anchor="middle" fill="#475569" font-size="9.5">y el esquema completo</text>
+  <line class="sep" x1="202" y1="232" x2="310" y2="232" stroke="#cbd5e1"/>
+  <text class="t" x="256" y="253" text-anchor="middle" fill="#0f172a" font-size="10.5" font-weight="600">sin confirmar</text>
+  <text class="s" x="256" y="272" text-anchor="middle" fill="#475569" font-size="9">dueño del esquema</text>
+  <text class="s" x="256" y="291" text-anchor="middle" fill="#0369a1" font-size="9" font-weight="600">se despliega</text>
+
+  <rect class="focus" x="346" y="154" width="148" height="148" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="420" y="180" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">portal</text>
+  <text class="s" x="420" y="201" text-anchor="middle" fill="#475569" font-size="9.5">Angular 20 · el mismo</text>
+  <text class="s" x="420" y="215" text-anchor="middle" fill="#475569" font-size="9.5">hexágono y el proxy</text>
+  <line class="sep" x1="366" y1="232" x2="474" y2="232" stroke="#cbd5e1"/>
+  <text class="t" x="420" y="253" text-anchor="middle" fill="#0f172a" font-size="10.5" font-weight="600">sin confirmar</text>
+  <text class="s" x="420" y="272" text-anchor="middle" fill="#475569" font-size="9">no almacena nada</text>
+  <text class="s" x="420" y="291" text-anchor="middle" fill="#0369a1" font-size="9" font-weight="600">se despliega</text>
+
+  <rect class="box" x="510" y="154" width="148" height="148" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="584" y="180" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">docs</text>
+  <text class="s" x="584" y="201" text-anchor="middle" fill="#475569" font-size="9.5">la especificación viva</text>
+  <text class="s" x="584" y="215" text-anchor="middle" fill="#475569" font-size="9.5">y los entregables</text>
+  <line class="sep" x1="530" y1="232" x2="638" y2="232" stroke="#cbd5e1"/>
+  <text class="t" x="584" y="253" text-anchor="middle" fill="#0f172a" font-size="10.5" font-weight="600">sin confirmar</text>
+  <text class="s" x="584" y="272" text-anchor="middle" fill="#475569" font-size="9">ningún artefacto</text>
+  <text class="s" x="584" y="291" text-anchor="middle" fill="#475569" font-size="9">de código depende de él</text>
+
+  <rect class="box" x="674" y="154" width="148" height="148" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="748" y="180" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">tools</text>
+  <text class="s" x="748" y="201" text-anchor="middle" fill="#475569" font-size="9.5">sembrador · 22 imágenes</text>
+  <text class="s" x="748" y="215" text-anchor="middle" fill="#475569" font-size="9.5">sus ficheros, en la raíz</text>
+  <line class="sep" x1="694" y1="232" x2="802" y2="232" stroke="#cbd5e1"/>
+  <text class="t" x="748" y="253" text-anchor="middle" fill="#0f172a" font-size="10.5" font-weight="600">sin confirmar</text>
+  <text class="s" x="748" y="272" text-anchor="middle" fill="#475569" font-size="9">pide Python, no Docker:</text>
+  <text class="s" x="748" y="291" text-anchor="middle" fill="#475569" font-size="9">por eso salió de infra</text>
+
+  <rect class="box" x="838" y="154" width="148" height="148" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="912" y="180" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">page</text>
+  <text class="s" x="912" y="201" text-anchor="middle" fill="#475569" font-size="9.5">la página pública</text>
+  <text class="s" x="912" y="215" text-anchor="middle" fill="#475569" font-size="9.5">del producto</text>
+  <line class="sep" x1="858" y1="232" x2="966" y2="232" stroke="#cbd5e1"/>
+  <text class="t" x="912" y="253" text-anchor="middle" fill="#0f172a" font-size="10.5" font-weight="600">repo propio</text>
+  <text class="s" x="912" y="272" text-anchor="middle" fill="#475569" font-size="9">el único de los seis</text>
+  <text class="s" x="912" y="291" text-anchor="middle" fill="#475569" font-size="9">que está publicado</text>
+
+  <polyline class="edge" points="92,306 92,334 256,334 256,310" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <polyline class="edge" points="256,334 420,334 420,310" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="500" y="358" text-anchor="middle" fill="#334155" font-size="10">el compose construye desde ../simple-stock-flow-api y ../simple-stock-flow-portal</text>
+  <text class="lbl" x="500" y="373" text-anchor="middle" fill="#334155" font-size="10">por eso esos tres directorios tienen que estar uno al lado del otro</text>
+
+  <text class="s" x="500" y="412" text-anchor="middle" fill="#475569" font-size="10.5">Los tres primeros levantan el sistema. Los tres últimos no entran en el compose y no hacen falta para arrancar.</text>
+  <text class="s" x="500" y="434" text-anchor="middle" fill="#475569" font-size="10.5">tools se separó de infra el 2026-09-21: el sembrador exige Python, Pillow, requests y Chrome, y la infraestructura promete solo Docker.</text>
+  <text class="s" x="500" y="456" text-anchor="middle" fill="#475569" font-size="10.5">Medido el 2026-09-21: la raíz es un repositorio con una sola confirmación, la del árbol anterior, y los seis figuran sin seguimiento.</text>
+  <text class="s" x="500" y="478" text-anchor="middle" fill="#475569" font-size="10.5">Salvo page, su contenido existe solo en disco y un borrado no se recupera: no se commitea hasta tener una versión probada.</text>
+</svg>

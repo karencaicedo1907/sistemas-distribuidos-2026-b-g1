@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 720" role="img"
+     aria-label="Secuencia del registro de una venta: carga de productos, invariante comprobada en el dominio, congelación de los atributos, confirmación atómica, choque de concurrencia, tres reintentos y conflicto al agotarlos."
+     font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif">
+  <title>El registro de una venta, paso a paso</title>
+  <desc>La operación donde se concentra el riesgo: atomicidad, congelación de atributos y reintento acotado por conflicto.</desc>
+  <defs>
+    <marker id="ms" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+      <path class="ah" d="M0,0 L9,3.5 L0,7 z" fill="#475569"/>
+    </marker>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .card { fill: #0b1220; stroke: #1e293b; }
+        .head { fill: #0c3a52; stroke: #38bdf8; }
+        .note { fill: #131c2e; stroke: #475569; }
+        .loop { stroke: #94a3b8; }
+        .life { stroke: #475569; }
+        .t    { fill: #e2e8f0; }
+        .s    { fill: #94a3b8; }
+        .edge { stroke: #94a3b8; }
+        .ah   { fill: #94a3b8; }
+      }
+    </style>
+  </defs>
+
+  <rect class="card" x="0.5" y="0.5" width="1179" height="719" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text class="t" x="590" y="32" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">Registrar una venta: la operación donde se concentra el riesgo</text>
+  <text class="s" x="590" y="52" text-anchor="middle" fill="#475569" font-size="11">Ninguna regla de negocio se decide fuera del dominio; el caso de uso solo ordena los pasos</text>
+
+  <!-- lifelines -->
+  <rect class="head" x="24" y="70" width="180" height="40" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="114" y="88" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">Adaptador entrante</text>
+  <text class="s" x="114" y="103" text-anchor="middle" fill="#475569" font-size="10">controlador de ventas</text>
+  <line class="life" x1="114" y1="110" x2="114" y2="648" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <rect class="head" x="256" y="70" width="180" height="40" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="346" y="88" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">Caso de uso</text>
+  <text class="s" x="346" y="103" text-anchor="middle" fill="#475569" font-size="10">servicio de registro de venta</text>
+  <line class="life" x1="346" y1="110" x2="346" y2="648" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <rect class="head" x="488" y="70" width="180" height="40" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="578" y="88" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">Dominio</text>
+  <text class="s" x="578" y="103" text-anchor="middle" fill="#475569" font-size="10">agregados de venta y producto</text>
+  <line class="life" x1="578" y1="110" x2="578" y2="648" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <rect class="head" x="720" y="70" width="180" height="40" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="810" y="88" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">Puertos salientes</text>
+  <text class="s" x="810" y="103" text-anchor="middle" fill="#475569" font-size="10">repositorios · unidad de trabajo</text>
+  <line class="life" x1="810" y1="110" x2="810" y2="648" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <rect class="head" x="952" y="70" width="180" height="40" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="1042" y="88" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">Motor</text>
+  <text class="s" x="1042" y="103" text-anchor="middle" fill="#475569" font-size="10">PostgreSQL</text>
+  <line class="life" x1="1042" y1="110" x2="1042" y2="648" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- bucle de reintento -->
+  <rect class="loop" x="252" y="168" width="866" height="404" rx="8" fill="none" stroke="#94a3b8" stroke-dasharray="6 5"/>
+  <rect class="loop" x="252" y="168" width="268" height="22" rx="6" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="264" y="184" fill="#0f172a" font-size="10" font-weight="600">hasta 3 intentos, con espera irregular entre ellos</text>
+
+  <!-- 1 -->
+  <line class="edge" x1="114" y1="142" x2="344" y2="142" stroke="#475569" stroke-width="1.4" marker-end="url(#ms)"/>
+  <text class="s" x="229" y="136" text-anchor="middle" fill="#475569" font-size="10">registrar la venta con sus líneas</text>
+
+  <!-- 2 -->
+  <path class="edge" d="M346,208 L392,208 L392,224 L348,224" fill="none" stroke="#475569" stroke-width="1.4" marker-end="url(#ms)"/>
+  <text class="s" x="404" y="212" fill="#475569" font-size="10">descarta lo leído antes: el reintento repite la lectura, no solo la escritura</text>
+
+  <!-- 3 -->
+  <line class="edge" x1="346" y1="252" x2="808" y2="252" stroke="#475569" stroke-width="1.4" marker-end="url(#ms)"/>
+  <text class="s" x="577" y="246" text-anchor="middle" fill="#475569" font-size="10">cargar los productos por identificador · el filtro de bajas excluye los retirados</text>
+  <line class="edge" x1="810" y1="276" x2="1040" y2="276" stroke="#475569" stroke-width="1.4" marker-end="url(#ms)"/>
+  <text class="s" x="925" y="270" text-anchor="middle" fill="#475569" font-size="10">consulta · lee el token de versión de cada fila</text>
+
+  <!-- 4 -->
+  <line class="edge" x1="346" y1="304" x2="808" y2="304" stroke="#475569" stroke-width="1.4" marker-end="url(#ms)"/>
+  <text class="s" x="577" y="298" text-anchor="middle" fill="#475569" font-size="10">listar las categorías: son un conjunto cerrado de cinco filas</text>
+
+  <!-- 5 -->
+  <line class="edge" x1="346" y1="336" x2="576" y2="336" stroke="#475569" stroke-width="1.4" marker-end="url(#ms)"/>
+  <text class="s" x="461" y="330" text-anchor="middle" fill="#475569" font-size="10">abrir la venta con el instante del reloj inyectado</text>
+
+  <!-- 6 -->
+  <line class="edge" x1="346" y1="376" x2="576" y2="376" stroke="#475569" stroke-width="1.4" marker-end="url(#ms)"/>
+  <text class="s" x="461" y="370" text-anchor="middle" fill="#475569" font-size="10">añadir cada línea</text>
+  <rect class="note" x="488" y="386" width="404" height="62" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="502" y="404" fill="#0f172a" font-size="10" font-weight="600">Aquí, y solo aquí, se decide el negocio</text>
+  <text class="s" x="502" y="420" fill="#475569" font-size="10">El agregado retira las existencias y rechaza dejarlas negativas,</text>
+  <text class="s" x="502" y="436" fill="#475569" font-size="10">y congela nombre, precio y categoría del momento de la venta.</text>
+
+  <!-- 7 -->
+  <line class="edge" x1="346" y1="470" x2="808" y2="470" stroke="#475569" stroke-width="1.4" marker-end="url(#ms)"/>
+  <text class="s" x="577" y="464" text-anchor="middle" fill="#475569" font-size="10">añadir la venta y confirmar: el descuento y las líneas viajan juntos o no viaja ninguno</text>
+
+  <!-- 8 -->
+  <line class="edge" x1="810" y1="522" x2="1040" y2="522" stroke="#475569" stroke-width="1.4" marker-end="url(#ms)"/>
+  <text class="s" x="925" y="516" text-anchor="middle" fill="#475569" font-size="10">escritura condicionada a que la fila no haya cambiado</text>
+  <line class="edge" x1="1042" y1="552" x2="812" y2="552" stroke="#475569" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ms)"/>
+  <text class="s" x="925" y="546" text-anchor="middle" fill="#475569" font-size="10">cambió: ninguna fila afectada</text>
+
+  <!-- salidas -->
+  <rect class="note" x="24" y="586" width="356" height="72" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="38" y="606" fill="#0f172a" font-size="11" font-weight="600">Si una regla falló</text>
+  <text class="s" x="38" y="624" fill="#475569" font-size="10">La petición estaba bien formada y la regla no se cumple:</text>
+  <text class="s" x="38" y="640" fill="#475569" font-size="10">se responde 422, traducido en un único punto del sistema.</text>
+
+  <rect class="note" x="400" y="586" width="356" height="72" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="414" y="606" fill="#0f172a" font-size="11" font-weight="600">Si el conflicto se repite</text>
+  <text class="s" x="414" y="624" fill="#475569" font-size="10">Agotados los tres intentos se responde 409, y quien vende</text>
+  <text class="s" x="414" y="640" fill="#475569" font-size="10">vuelve a intentarlo sobre unas existencias ya actualizadas.</text>
+
+  <rect class="note" x="776" y="586" width="356" height="72" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="790" y="606" fill="#0f172a" font-size="11" font-weight="600">La última barrera</text>
+  <text class="s" x="790" y="624" fill="#475569" font-size="10">El motor comprueba además que las existencias no bajen</text>
+  <text class="s" x="790" y="640" fill="#475569" font-size="10">de cero. Si salta, algo escribió por fuera del adaptador.</text>
+
+  <text class="s" x="1132" y="690" text-anchor="end" fill="#475569" font-size="10">Elaboración propia a partir del servicio de registro de venta y de la política de reintento, comprobados el 21 de septiembre de 2026</text>
+</svg>

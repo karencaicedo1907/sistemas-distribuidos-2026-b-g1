@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" role="img"
+     aria-label="Arranque: la base crea el motor vacío y avisa con pg_isready; solo entonces arranca el servicio, que exige la clave de firma, aplica migraciones, crea el primer administrador y escucha; solo cuando responde arranca el portal."
+     font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif">
+  <title>Qué ocurre, y en qué orden, con un docker compose up</title>
+  <desc>Tres carriles encadenados por healthchecks, no por orden de arranque.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+      <path class="ah" d="M0,0 L9,3.5 L0,7 z" fill="#475569"/>
+    </marker>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .card { fill: #0b1220; stroke: #1e293b; }
+        .lane { fill: #0e1626; stroke: #1e293b; }
+        .box  { fill: #172033; stroke: #475569; }
+        .focus{ fill: #0c3a52; stroke: #38bdf8; }
+        .t    { fill: #e2e8f0; }
+        .s    { fill: #94a3b8; }
+        .lbl  { fill: #cbd5e1; }
+        .edge { stroke: #94a3b8; }
+        .ah   { fill: #94a3b8; }
+      }
+    </style>
+  </defs>
+
+  <rect class="card" x="0.5" y="0.5" width="999" height="519" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <rect class="lane" x="140" y="56" width="840" height="88" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text class="t" x="76" y="96" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="600">db</text>
+  <text class="s" x="76" y="113" text-anchor="middle" fill="#475569" font-size="10">postgres</text>
+
+  <rect class="box" x="160" y="72" width="200" height="56" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="260" y="96" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">crea base y usuario</text>
+  <text class="s" x="260" y="114" text-anchor="middle" fill="#475569" font-size="10">vacíos · ni una línea de DDL</text>
+
+  <rect class="focus" x="400" y="72" width="180" height="56" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="490" y="96" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">healthcheck</text>
+  <text class="s" x="490" y="114" text-anchor="middle" fill="#475569" font-size="10">pg_isready</text>
+  <line class="edge" x1="364" y1="100" x2="396" y2="100" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <polyline class="edge" points="490,132 490,166 230,166 230,196" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#a)"/>
+  <text class="lbl" x="360" y="160" text-anchor="middle" fill="#334155" font-size="10">depends_on: condition service_healthy</text>
+
+  <rect class="lane" x="140" y="184" width="840" height="110" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text class="t" x="76" y="234" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="600">service</text>
+  <text class="s" x="76" y="251" text-anchor="middle" fill="#475569" font-size="10">.NET 8</text>
+
+  <rect class="box" x="160" y="200" width="140" height="78" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="230" y="224" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">Jwt__SigningKey</text>
+  <text class="s" x="230" y="242" text-anchor="middle" fill="#475569" font-size="10">si falta o es corta,</text>
+  <text class="s" x="230" y="256" text-anchor="middle" fill="#475569" font-size="10">se niega a arrancar</text>
+  <text class="s" x="230" y="270" text-anchor="middle" fill="#475569" font-size="10">y dice por qué</text>
+
+  <rect class="box" x="326" y="200" width="140" height="78" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="396" y="224" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">MigrateAsync()</text>
+  <text class="s" x="396" y="242" text-anchor="middle" fill="#475569" font-size="10">crea el esquema</text>
+  <text class="s" x="396" y="256" text-anchor="middle" fill="#475569" font-size="10">y las categorías</text>
+  <text class="s" x="396" y="270" text-anchor="middle" fill="#475569" font-size="10">de referencia</text>
+
+  <rect class="box" x="492" y="200" width="140" height="78" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="562" y="224" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">primer admin</text>
+  <text class="s" x="562" y="242" text-anchor="middle" fill="#475569" font-size="10">del entorno, si no</text>
+  <text class="s" x="562" y="256" text-anchor="middle" fill="#475569" font-size="10">existe ya · sin él</text>
+  <text class="s" x="562" y="270" text-anchor="middle" fill="#475569" font-size="10">no se entra</text>
+
+  <rect class="box" x="658" y="200" width="140" height="78" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="728" y="232" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">escucha :8080</text>
+  <text class="s" x="728" y="250" text-anchor="middle" fill="#475569" font-size="10">y con Swagger</text>
+  <text class="s" x="728" y="264" text-anchor="middle" fill="#475569" font-size="10">montado</text>
+
+  <rect class="focus" x="824" y="200" width="140" height="78" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="894" y="232" text-anchor="middle" fill="#0f172a" font-size="11" font-weight="600">healthcheck</text>
+  <text class="s" x="894" y="250" text-anchor="middle" fill="#475569" font-size="10">el puerto 8080</text>
+  <text class="s" x="894" y="264" text-anchor="middle" fill="#475569" font-size="10">acepta conexión</text>
+
+  <line class="edge" x1="304" y1="239" x2="322" y2="239" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="470" y1="239" x2="488" y2="239" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="636" y1="239" x2="654" y2="239" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="802" y1="239" x2="820" y2="239" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <polyline class="edge" points="894,282 894,316 260,316 260,346" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#a)"/>
+  <text class="lbl" x="577" y="310" text-anchor="middle" fill="#334155" font-size="10">depends_on: condition service_healthy</text>
+
+  <rect class="lane" x="140" y="334" width="840" height="88" rx="10" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text class="t" x="76" y="374" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="600">portal</text>
+  <text class="s" x="76" y="391" text-anchor="middle" fill="#475569" font-size="10">nginx</text>
+
+  <rect class="box" x="160" y="350" width="200" height="56" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="260" y="374" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">sirve el build</text>
+  <text class="s" x="260" y="392" text-anchor="middle" fill="#475569" font-size="10">y hace de proxy a service:8080</text>
+
+  <rect class="focus" x="400" y="350" width="180" height="56" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="490" y="374" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">healthcheck</text>
+  <text class="s" x="490" y="392" text-anchor="middle" fill="#475569" font-size="10">wget a 127.0.0.1</text>
+  <line class="edge" x1="364" y1="378" x2="396" y2="378" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <rect class="box" x="620" y="350" width="344" height="56" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="792" y="374" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">el sistema está en http://localhost:8080</text>
+  <text class="s" x="792" y="392" text-anchor="middle" fill="#475569" font-size="10">y la API se documenta a sí misma en /swagger</text>
+  <line class="edge" x1="584" y1="378" x2="616" y2="378" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <text class="s" x="500" y="456" text-anchor="middle" fill="#475569" font-size="10.5">Cada carril espera al healthcheck del anterior, no a que su contenedor exista: por eso no hay un primer arranque que falla y un segundo que funciona.</text>
+  <text class="s" x="500" y="478" text-anchor="middle" fill="#475569" font-size="10.5">El motor llega vacío y el esquema lo pone el servicio. Es la decisión de ADR-001, y es lo que hace que el orden importe.</text>
+</svg>

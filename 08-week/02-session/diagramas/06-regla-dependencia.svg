@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" role="img"
+     aria-label="Grafo de referencias entre proyectos: bootstrap referencia a los cuatro adaptadores, cada adaptador referencia solo a application, application referencia solo a domain, y de domain no sale ninguna flecha."
+     font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif">
+  <title>La regla de dependencia, tal como la declaran los .csproj</title>
+  <desc>Las flechas son ProjectReference reales de la solución SimpleStockFlow.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+      <path class="ah" d="M0,0 L9,3.5 L0,7 z" fill="#475569"/>
+    </marker>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .card { fill: #0b1220; stroke: #1e293b; }
+        .box  { fill: #172033; stroke: #475569; }
+        .focus{ fill: #0c3a52; stroke: #38bdf8; }
+        .test { fill: #111a2b; stroke: #475569; }
+        .t    { fill: #e2e8f0; }
+        .s    { fill: #94a3b8; }
+        .lbl  { fill: #cbd5e1; }
+        .edge { stroke: #94a3b8; }
+        .ah   { fill: #94a3b8; }
+      }
+    </style>
+  </defs>
+
+  <rect class="card" x="0.5" y="0.5" width="999" height="469" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <rect class="box" x="30" y="150" width="160" height="76" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="110" y="180" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="600">Bootstrap</text>
+  <text class="s" x="110" y="199" text-anchor="middle" fill="#475569" font-size="10">compone el hexágono</text>
+  <text class="s" x="110" y="214" text-anchor="middle" fill="#475569" font-size="10">y arranca el proceso</text>
+
+  <rect class="box" x="256" y="40" width="176" height="56" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="344" y="64" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Adapters.Rest</text>
+  <text class="s" x="344" y="82" text-anchor="middle" fill="#475569" font-size="10">el único adaptador entrante</text>
+
+  <rect class="box" x="256" y="110" width="176" height="56" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="344" y="134" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Adapters.Persistence</text>
+  <text class="s" x="344" y="152" text-anchor="middle" fill="#475569" font-size="10">EF Core · Npgsql · migraciones</text>
+
+  <rect class="box" x="256" y="180" width="176" height="56" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="344" y="204" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Adapters.Security</text>
+  <text class="s" x="344" y="222" text-anchor="middle" fill="#475569" font-size="10">JWT · PBKDF2</text>
+
+  <rect class="box" x="256" y="250" width="176" height="56" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="344" y="274" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Adapters.Storage</text>
+  <text class="s" x="344" y="292" text-anchor="middle" fill="#475569" font-size="10">binarios en disco</text>
+
+  <rect class="box" x="510" y="150" width="170" height="76" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="595" y="180" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="600">Application</text>
+  <text class="s" x="595" y="199" text-anchor="middle" fill="#475569" font-size="10">puertos</text>
+  <text class="s" x="595" y="214" text-anchor="middle" fill="#475569" font-size="10">y casos de uso</text>
+
+  <rect class="focus" x="770" y="150" width="170" height="76" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="855" y="180" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="600">Domain</text>
+  <text class="s" x="855" y="199" text-anchor="middle" fill="#475569" font-size="10">reglas</text>
+  <text class="s" x="855" y="214" text-anchor="middle" fill="#475569" font-size="10">e invariantes</text>
+  <text class="s" x="855" y="140" text-anchor="middle" fill="#475569" font-size="10.5" font-weight="600">de aquí no sale ninguna flecha</text>
+
+  <line class="edge" x1="190" y1="182" x2="252" y2="72" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="190" y1="184" x2="252" y2="140" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="190" y1="192" x2="252" y2="206" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="190" y1="196" x2="252" y2="276" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <line class="edge" x1="436" y1="72" x2="506" y2="176" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="436" y1="140" x2="506" y2="180" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="436" y1="206" x2="506" y2="196" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="edge" x1="436" y1="276" x2="506" y2="200" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <line class="edge" x1="680" y1="188" x2="766" y2="188" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="723" y="180" text-anchor="middle" fill="#334155" font-size="10">referencia</text>
+
+  <rect class="test" x="30" y="352" width="200" height="66" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <text class="t" x="130" y="376" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Adapters.IntegrationTests</text>
+  <text class="s" x="130" y="394" text-anchor="middle" fill="#475569" font-size="10">el host entero contra un</text>
+  <text class="s" x="130" y="409" text-anchor="middle" fill="#475569" font-size="10">Postgres real (Testcontainers)</text>
+  <line class="edge" x1="110" y1="348" x2="110" y2="230" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#a)"/>
+
+  <rect class="test" x="510" y="352" width="170" height="66" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <text class="t" x="595" y="376" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Application.UnitTests</text>
+  <text class="s" x="595" y="394" text-anchor="middle" fill="#475569" font-size="10">con dobles</text>
+  <text class="s" x="595" y="409" text-anchor="middle" fill="#475569" font-size="10">de los puertos salientes</text>
+  <line class="edge" x1="595" y1="348" x2="595" y2="230" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#a)"/>
+
+  <rect class="test" x="770" y="352" width="170" height="66" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <text class="t" x="855" y="376" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">Domain.UnitTests</text>
+  <text class="s" x="855" y="394" text-anchor="middle" fill="#475569" font-size="10">sin un solo doble:</text>
+  <text class="s" x="855" y="409" text-anchor="middle" fill="#475569" font-size="10">no hay nada que fingir</text>
+  <line class="edge" x1="855" y1="348" x2="855" y2="230" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#a)"/>
+
+  <text class="s" x="500" y="446" text-anchor="middle" fill="#475569" font-size="10.5">Cada flecha es un ProjectReference que se puede leer en el .csproj. Los proyectos se llaman SimpleStockFlow.*; aquí va el sufijo.</text>
+</svg>

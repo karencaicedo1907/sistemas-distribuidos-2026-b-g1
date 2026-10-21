@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 660" role="img"
+     aria-label="Las cinco tablas persistidas con sus claves foráneas, los atributos que la línea de venta congela, la columna de baja lógica y los dos índices parciales que solo cubren los productos activos."
+     font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif">
+  <title>El modelo de datos</title>
+  <desc>category, product, sale, sale_item y user, con las cuatro claves foráneas y su acción de borrado.</desc>
+  <defs>
+    <marker id="fk" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+      <path class="ah" d="M0,0 L9,3.5 L0,7 z" fill="#475569"/>
+    </marker>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .card { fill: #0b1220; stroke: #1e293b; }
+        .box  { fill: #0f172a; stroke: #475569; }
+        .head { fill: #0c3a52; stroke: #38bdf8; }
+        .note { fill: #131c2e; stroke: #475569; }
+        .t    { fill: #e2e8f0; }
+        .s    { fill: #94a3b8; }
+        .edge { stroke: #94a3b8; }
+        .ah   { fill: #94a3b8; }
+      }
+    </style>
+  </defs>
+
+  <rect class="card" x="0.5" y="0.5" width="1119" height="659" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <text class="t" x="560" y="34" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="600">Esquema sales · cinco tablas, cuatro claves foráneas</text>
+  <text class="s" x="560" y="54" text-anchor="middle" fill="#475569" font-size="11">Toda restricción de este dibujo vive en el motor: ninguna ruta de escritura puede eludirla</text>
+
+  <!-- category -->
+  <rect class="box" x="36" y="86" width="240" height="96" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <rect class="head" x="36" y="86" width="240" height="28" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="50" y="105" fill="#0f172a" font-size="12" font-weight="600">category</text>
+  <text class="s" x="266" y="105" text-anchor="end" fill="#475569" font-size="10">datos de referencia</text>
+  <text class="t" x="50" y="134" fill="#0f172a" font-size="11">id</text>
+  <text class="s" x="266" y="134" text-anchor="end" fill="#475569" font-size="10">clave primaria</text>
+  <text class="t" x="50" y="155" fill="#0f172a" font-size="11">name</text>
+  <text class="s" x="266" y="155" text-anchor="end" fill="#475569" font-size="10">único · no en blanco</text>
+  <text class="s" x="50" y="174" fill="#475569" font-size="10">solo lectura: ningún caso de uso las crea</text>
+
+  <!-- product -->
+  <rect class="box" x="36" y="262" width="240" height="212" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <rect class="head" x="36" y="262" width="240" height="28" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="50" y="281" fill="#0f172a" font-size="12" font-weight="600">product</text>
+  <text class="t" x="50" y="310" fill="#0f172a" font-size="11">id</text>
+  <text class="s" x="266" y="310" text-anchor="end" fill="#475569" font-size="10">clave primaria</text>
+  <text class="t" x="50" y="331" fill="#0f172a" font-size="11">name</text>
+  <text class="t" x="50" y="352" fill="#0f172a" font-size="11">price</text>
+  <text class="s" x="266" y="352" text-anchor="end" fill="#475569" font-size="10">mayor que cero</text>
+  <text class="t" x="50" y="373" fill="#0f172a" font-size="11">stock</text>
+  <text class="s" x="266" y="373" text-anchor="end" fill="#475569" font-size="10">nunca negativo</text>
+  <text class="t" x="50" y="394" fill="#0f172a" font-size="11">category_id</text>
+  <text class="s" x="266" y="394" text-anchor="end" fill="#475569" font-size="10">clave foránea</text>
+  <text class="t" x="50" y="415" fill="#0f172a" font-size="11">image_key</text>
+  <text class="s" x="266" y="415" text-anchor="end" fill="#475569" font-size="10">opcional · clave opaca</text>
+  <text class="t" x="50" y="436" fill="#0f172a" font-size="11" font-weight="600">deleted_at</text>
+  <text class="s" x="266" y="436" text-anchor="end" fill="#475569" font-size="10">nulo = activo</text>
+  <text class="s" x="50" y="458" fill="#475569" font-size="10">la baja lógica: filtro global, no columna del dominio</text>
+
+  <!-- sale -->
+  <rect class="box" x="436" y="86" width="248" height="138" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <rect class="head" x="436" y="86" width="248" height="28" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="450" y="105" fill="#0f172a" font-size="12" font-weight="600">sale</text>
+  <text class="s" x="674" y="105" text-anchor="end" fill="#475569" font-size="10">raíz de agregado</text>
+  <text class="t" x="450" y="134" fill="#0f172a" font-size="11">id</text>
+  <text class="s" x="674" y="134" text-anchor="end" fill="#475569" font-size="10">clave primaria</text>
+  <text class="t" x="450" y="155" fill="#0f172a" font-size="11">sold_at</text>
+  <text class="s" x="674" y="155" text-anchor="end" fill="#475569" font-size="10">indexado</text>
+  <text class="t" x="450" y="176" fill="#0f172a" font-size="11">sold_by_username</text>
+  <text class="s" x="674" y="176" text-anchor="end" fill="#475569" font-size="10">dato personal</text>
+  <text class="t" x="450" y="197" fill="#0f172a" font-size="11">sold_by_user_id</text>
+  <text class="s" x="674" y="197" text-anchor="end" fill="#475569" font-size="10">clave foránea</text>
+  <text class="s" x="450" y="216" fill="#475569" font-size="10">sin total: se calcula desde las líneas</text>
+
+  <!-- sale_item -->
+  <rect class="box" x="436" y="262" width="248" height="212" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <rect class="head" x="436" y="262" width="248" height="28" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="450" y="281" fill="#0f172a" font-size="12" font-weight="600">sale_item</text>
+  <text class="s" x="674" y="281" text-anchor="end" fill="#475569" font-size="10">no vive fuera de su venta</text>
+  <text class="t" x="450" y="310" fill="#0f172a" font-size="11">id</text>
+  <text class="s" x="674" y="310" text-anchor="end" fill="#475569" font-size="10">clave primaria</text>
+  <text class="t" x="450" y="331" fill="#0f172a" font-size="11">sale_id</text>
+  <text class="s" x="674" y="331" text-anchor="end" fill="#475569" font-size="10">clave foránea</text>
+  <text class="t" x="450" y="352" fill="#0f172a" font-size="11">product_id</text>
+  <text class="s" x="674" y="352" text-anchor="end" fill="#475569" font-size="10">clave foránea</text>
+  <text class="t" x="450" y="373" fill="#0f172a" font-size="11" font-weight="600">product_name</text>
+  <text class="s" x="674" y="373" text-anchor="end" fill="#475569" font-size="10">congelado</text>
+  <text class="t" x="450" y="394" fill="#0f172a" font-size="11" font-weight="600">unit_price</text>
+  <text class="s" x="674" y="394" text-anchor="end" fill="#475569" font-size="10">congelado</text>
+  <text class="t" x="450" y="415" fill="#0f172a" font-size="11" font-weight="600">category_name</text>
+  <text class="s" x="674" y="415" text-anchor="end" fill="#475569" font-size="10">congelado</text>
+  <text class="t" x="450" y="436" fill="#0f172a" font-size="11">quantity</text>
+  <text class="s" x="674" y="436" text-anchor="end" fill="#475569" font-size="10">mayor que cero</text>
+  <text class="s" x="450" y="458" fill="#475569" font-size="10">único (sale_id, product_id): un producto no se repite</text>
+
+  <!-- user -->
+  <rect class="box" x="844" y="86" width="240" height="138" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <rect class="head" x="844" y="86" width="240" height="28" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="858" y="105" fill="#0f172a" font-size="12" font-weight="600">user</text>
+  <text class="t" x="858" y="134" fill="#0f172a" font-size="11">id</text>
+  <text class="s" x="1074" y="134" text-anchor="end" fill="#475569" font-size="10">clave primaria</text>
+  <text class="t" x="858" y="155" fill="#0f172a" font-size="11">username</text>
+  <text class="s" x="1074" y="155" text-anchor="end" fill="#475569" font-size="10">único · normalizado</text>
+  <text class="t" x="858" y="176" fill="#0f172a" font-size="11">password_hash</text>
+  <text class="s" x="1074" y="176" text-anchor="end" fill="#475569" font-size="10">jamás sale ni se indexa</text>
+  <text class="t" x="858" y="197" fill="#0f172a" font-size="11">role</text>
+  <text class="s" x="1074" y="197" text-anchor="end" fill="#475569" font-size="10">admin o seller</text>
+  <text class="s" x="858" y="216" fill="#475569" font-size="10">conjunto cerrado, comprobado en el motor</text>
+
+  <!-- claves foráneas -->
+  <path class="edge" d="M156,262 L156,182" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#fk)"/>
+  <text class="s" x="164" y="228" fill="#475569" font-size="10">restrictivo</text>
+
+  <path class="edge" d="M436,368 L276,368" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#fk)"/>
+  <text class="s" x="356" y="360" text-anchor="middle" fill="#475569" font-size="10">restrictivo</text>
+  <text class="s" x="356" y="386" text-anchor="middle" fill="#475569" font-size="10">barrera del histórico</text>
+
+  <path class="edge" d="M560,262 L560,224" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#fk)"/>
+  <text class="s" x="568" y="248" fill="#475569" font-size="10">en cascada</text>
+
+  <path class="edge" d="M684,155 L844,155" fill="none" stroke="#94a3b8" stroke-width="1.6" marker-end="url(#fk)"/>
+  <text class="s" x="764" y="147" text-anchor="middle" fill="#475569" font-size="10">restrictivo</text>
+  <text class="s" x="764" y="173" text-anchor="middle" fill="#475569" font-size="10">la autoría no queda huérfana</text>
+
+  <!-- notas -->
+  <rect class="note" x="744" y="262" width="340" height="212" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="762" y="288" fill="#0f172a" font-size="12" font-weight="600">Los dos índices del catálogo</text>
+  <text class="s" x="762" y="310" fill="#475569" font-size="10">Son parciales: solo cubren los productos activos,</text>
+  <text class="s" x="762" y="326" fill="#475569" font-size="10">porque el predicado de la baja lógica es el mismo</text>
+  <text class="s" x="762" y="342" fill="#475569" font-size="10">que lleva toda consulta del catálogo.</text>
+  <text class="t" x="762" y="368" fill="#0f172a" font-size="11">(category_id, name) donde deleted_at es nulo</text>
+  <text class="s" x="762" y="386" fill="#475569" font-size="10">recorrido ordenado del catálogo</text>
+  <text class="t" x="762" y="410" fill="#0f172a" font-size="11">trigramas sobre name donde deleted_at es nulo</text>
+  <text class="s" x="762" y="428" fill="#475569" font-size="10">búsqueda por nombre parcial; exige la extensión</text>
+  <text class="s" x="762" y="444" fill="#475569" font-size="10">de trigramas, que instala la propia migración</text>
+  <text class="s" x="762" y="464" fill="#475569" font-size="10">Un producto retirado deja de ocupar sitio en los dos</text>
+
+  <rect class="note" x="36" y="510" width="1048" height="116" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="54" y="536" fill="#0f172a" font-size="12" font-weight="600">Lo que el motor garantiza por su cuenta</text>
+  <text class="s" x="54" y="560" fill="#475569" font-size="11">Seis comprobaciones: las existencias nunca bajan de cero · el precio es mayor que cero · la cantidad vendida es mayor que cero ·</text>
+  <text class="s" x="54" y="580" fill="#475569" font-size="11">el rol pertenece a un conjunto cerrado · el nombre de usuario está normalizado · el nombre de una categoría no está en blanco.</text>
+  <text class="s" x="54" y="604" fill="#475569" font-size="11">Cada una duplica a propósito una regla que el dominio ya impone: si alguna salta, es que algo escribió por fuera del adaptador.</text>
+  <text class="s" x="1084" y="646" text-anchor="end" fill="#475569" font-size="10">Comprobado contra el motor el 21 de septiembre de 2026</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 530" role="img"
+     aria-label="Los dos repositorios repiten la misma forma: adaptadores fuera, puertos y casos de uso en medio, dominio dentro; y se tocan en un solo punto, el HTTP entre el cliente del portal y el adaptador REST."
+     font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif">
+  <title>El hexágono, dos veces</title>
+  <desc>Portal y servicio con las mismas tres capas y una raíz de composición cada uno.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+      <path class="ah" d="M0,0 L9,3.5 L0,7 z" fill="#475569"/>
+    </marker>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .card { fill: #0b1220; stroke: #1e293b; }
+        .zone { stroke: #475569; }
+        .ring1{ fill: #131c2e; stroke: #475569; }
+        .ring2{ fill: #172033; stroke: #55698a; }
+        .core { fill: #0c3a52; stroke: #38bdf8; }
+        .note { fill: #111a2b; stroke: #475569; }
+        .t    { fill: #e2e8f0; }
+        .s    { fill: #94a3b8; }
+        .lbl  { fill: #cbd5e1; }
+        .edge { stroke: #94a3b8; }
+        .ah   { fill: #94a3b8; }
+      }
+    </style>
+  </defs>
+
+  <rect class="card" x="0.5" y="0.5" width="999" height="529" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <rect class="zone" x="24" y="40" width="428" height="430" rx="14" fill="none" stroke="#94a3b8" stroke-dasharray="6 5"/>
+  <text class="t" x="238" y="66" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">simple-stock-flow-portal · Angular 20</text>
+  <rect class="ring1" x="38" y="82" width="400" height="286" rx="10" fill="#f8fafc" stroke="#94a3b8"/>
+  <text class="t" x="238" y="104" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">presentation/ · infrastructure/</text>
+  <text class="s" x="238" y="122" text-anchor="middle" fill="#475569" font-size="10">pantallas y guardas · http/ · mappers/ · interceptors/</text>
+  <rect class="ring2" x="70" y="138" width="336" height="206" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="238" y="160" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">application/</text>
+  <text class="s" x="238" y="178" text-anchor="middle" fill="#475569" font-size="10">ports/ (4) · use-cases/ (9) · state/</text>
+  <rect class="core" x="106" y="194" width="264" height="126" rx="10" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="238" y="224" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">domain/</text>
+  <text class="s" x="238" y="248" text-anchor="middle" fill="#475569" font-size="10">models · value-objects · policies</text>
+  <text class="s" x="238" y="272" text-anchor="middle" fill="#475569" font-size="10">sin una sola importación</text>
+  <text class="s" x="238" y="288" text-anchor="middle" fill="#475569" font-size="10">de Angular</text>
+  <rect class="note" x="70" y="396" width="336" height="58" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <text class="t" x="238" y="418" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">infrastructure/providers.ts</text>
+  <text class="s" x="238" y="437" text-anchor="middle" fill="#475569" font-size="10">el único sitio donde un puerto encuentra su adaptador</text>
+
+  <rect class="zone" x="568" y="40" width="408" height="430" rx="14" fill="none" stroke="#94a3b8" stroke-dasharray="6 5"/>
+  <text class="t" x="772" y="66" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">simple-stock-flow-api · .NET 8</text>
+  <rect class="ring1" x="582" y="82" width="380" height="286" rx="10" fill="#f8fafc" stroke="#94a3b8"/>
+  <text class="t" x="772" y="104" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">adapters/</text>
+  <text class="s" x="772" y="122" text-anchor="middle" fill="#475569" font-size="10">inbound/api · outbound/persistence · security · storage</text>
+  <rect class="ring2" x="610" y="138" width="324" height="206" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="772" y="160" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">application/</text>
+  <text class="s" x="772" y="178" text-anchor="middle" fill="#475569" font-size="10">Ports/Inbound (6) · Ports/Outbound (10) · Services (5)</text>
+  <rect class="core" x="642" y="194" width="260" height="126" rx="10" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="772" y="224" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">domain/</text>
+  <text class="s" x="772" y="248" text-anchor="middle" fill="#475569" font-size="10">Catalog · Sales · Identity · ValueObjects</text>
+  <text class="s" x="772" y="272" text-anchor="middle" fill="#475569" font-size="10">cero referencias salientes:</text>
+  <text class="s" x="772" y="288" text-anchor="middle" fill="#475569" font-size="10">ni ORM, ni HTTP, ni ficheros</text>
+  <rect class="note" x="610" y="396" width="324" height="58" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <text class="t" x="772" y="418" text-anchor="middle" fill="#0f172a" font-size="11.5" font-weight="600">bootstrap/Composition/PortBindings.cs</text>
+  <text class="s" x="772" y="437" text-anchor="middle" fill="#475569" font-size="10">un new de infraestructura fuera de aquí rompe el hexágono</text>
+
+  <line class="edge" x1="456" y1="250" x2="564" y2="250" stroke="#475569" stroke-width="1.5" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text class="lbl" x="510" y="232" text-anchor="middle" fill="#334155" font-size="10.5" font-weight="600">HTTP · JSON</text>
+  <text class="lbl" x="510" y="272" text-anchor="middle" fill="#334155" font-size="10">api.dto.ts</text>
+  <text class="lbl" x="510" y="286" text-anchor="middle" fill="#334155" font-size="10">↔ Ports/Inbound</text>
+
+  <text class="s" x="500" y="502" text-anchor="middle" fill="#475569" font-size="10.5">Se tocan en un punto y solo en uno: el cliente HTTP del portal contra el adaptador REST del servicio. Los dos dominios no se conocen.</text>
+</svg>

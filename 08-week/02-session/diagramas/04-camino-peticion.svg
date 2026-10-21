@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660" role="img"
+     aria-label="Camino de una petición: el navegador pide a nginx, nginx hace de proxy al servicio, el servicio valida el token y consulta Postgres; y una segunda puerta, la de /media, viaja sin token."
+     font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif">
+  <title>El camino de una petición, de la pantalla al motor</title>
+  <desc>Secuencia entre navegador, portal (nginx), service (.NET) y db (Postgres), con la ruta anónima de /media aparte.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+      <path class="ah" d="M0,0 L9,3.5 L0,7 z" fill="#475569"/>
+    </marker>
+    <marker id="ab" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+      <path class="ahb" d="M0,0 L9,3.5 L0,7 z" fill="#0284c7"/>
+    </marker>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .card { fill: #0b1220; stroke: #1e293b; }
+        .box  { fill: #172033; stroke: #475569; }
+        .focus{ fill: #0c3a52; stroke: #38bdf8; }
+        .note { fill: #111a2b; stroke: #475569; }
+        .t    { fill: #e2e8f0; }
+        .s    { fill: #94a3b8; }
+        .lbl  { fill: #cbd5e1; }
+        .edge { stroke: #94a3b8; }
+        .life { stroke: #475569; }
+        .acc  { stroke: #38bdf8; }
+        .acct { fill: #7dd3fc; }
+        .ah   { fill: #94a3b8; }
+        .ahb  { fill: #38bdf8; }
+      }
+    </style>
+  </defs>
+
+  <rect class="card" x="0.5" y="0.5" width="999" height="659" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <rect class="box" x="25" y="24" width="170" height="44" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="110" y="52" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="600">Navegador · Angular</text>
+  <rect class="box" x="255" y="24" width="170" height="44" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="340" y="52" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="600">portal · nginx</text>
+  <rect class="focus" x="535" y="24" width="170" height="44" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="620" y="52" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="600">service · .NET 8</text>
+  <rect class="box" x="805" y="24" width="170" height="44" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="890" y="52" text-anchor="middle" fill="#0f172a" font-size="12.5" font-weight="600">db · Postgres</text>
+
+  <line class="life" x1="110" y1="68" x2="110" y2="630" stroke="#94a3b8" stroke-dasharray="4 5"/>
+  <line class="life" x1="340" y1="68" x2="340" y2="630" stroke="#94a3b8" stroke-dasharray="4 5"/>
+  <line class="life" x1="620" y1="68" x2="620" y2="630" stroke="#94a3b8" stroke-dasharray="4 5"/>
+  <line class="life" x1="890" y1="68" x2="890" y2="630" stroke="#94a3b8" stroke-dasharray="4 5"/>
+
+  <line class="edge" x1="110" y1="120" x2="336" y2="120" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="223" y="102" text-anchor="middle" fill="#334155" font-size="10">GET /api/products?page=1&amp;pageSize=20</text>
+  <text class="lbl" x="223" y="114" text-anchor="middle" fill="#334155" font-size="10">Authorization: Bearer — lo pone el interceptor</text>
+
+  <line class="edge" x1="340" y1="182" x2="616" y2="182" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="478" y="164" text-anchor="middle" fill="#334155" font-size="10">proxy_pass http://service:8080$request_uri</text>
+  <text class="lbl" x="478" y="176" text-anchor="middle" fill="#334155" font-size="10">añade Host · X-Real-IP · X-Forwarded-For</text>
+
+  <path class="edge" d="M620,226 h44 a10,10 0 0 1 10,10 v14 a10,10 0 0 1 -10,10 h-44" fill="none" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="690" y="238" fill="#334155" font-size="10">valida la firma del token y mira el rol:</text>
+  <text class="lbl" x="690" y="251" fill="#334155" font-size="10">401 sin token · 403 si el rol no basta</text>
+
+  <line class="edge" x1="620" y1="302" x2="886" y2="302" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="753" y="284" text-anchor="middle" fill="#334155" font-size="10">SELECT … ORDER BY … OFFSET/LIMIT</text>
+  <text class="lbl" x="753" y="296" text-anchor="middle" fill="#334155" font-size="10">EF Core · Npgsql · TCP 5432</text>
+
+  <line class="edge" x1="890" y1="348" x2="624" y2="348" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#a)"/>
+  <text class="lbl" x="753" y="342" text-anchor="middle" fill="#334155" font-size="10">filas, ya paginadas por el motor</text>
+
+  <rect class="note" x="700" y="390" width="276" height="56" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+  <text class="s" x="714" y="411" fill="#475569" font-size="10">Si el dominio lanza, un único filtro traduce:</text>
+  <text class="s" x="714" y="427" fill="#475569" font-size="10">422 regla de negocio · 409 concurrencia</text>
+  <text class="s" x="714" y="440" fill="#475569" font-size="10">404 inexistente · 400 contrato mal formado</text>
+
+  <line class="edge" x1="620" y1="412" x2="344" y2="412" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="482" y="394" text-anchor="middle" fill="#334155" font-size="10">200 · application/json</text>
+  <text class="lbl" x="482" y="406" text-anchor="middle" fill="#334155" font-size="10">PagedResult&lt;ProductView&gt;</text>
+
+  <line class="edge" x1="340" y1="468" x2="114" y2="468" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="227" y="450" text-anchor="middle" fill="#334155" font-size="10">200 · el mapper lo convierte</text>
+  <text class="lbl" x="227" y="462" text-anchor="middle" fill="#334155" font-size="10">en el modelo de dominio del portal</text>
+
+  <line class="life" x1="25" y1="502" x2="975" y2="502" stroke="#cbd5e1" stroke-dasharray="2 6"/>
+  <text class="acct" x="500" y="520" text-anchor="middle" fill="#0369a1" font-size="11" font-weight="600">La segunda puerta: la imagen del producto, que viaja sin token</text>
+
+  <line class="acc" x1="110" y1="576" x2="336" y2="576" stroke="#0284c7" stroke-width="1.5" marker-end="url(#ab)"/>
+  <text class="acct" x="223" y="558" text-anchor="middle" fill="#0369a1" font-size="10">GET /media/{clave} — sin cabecera alguna</text>
+  <text class="acct" x="223" y="570" text-anchor="middle" fill="#0369a1" font-size="10">lo pide la etiqueta &lt;img&gt; de la pantalla</text>
+
+  <line class="acc" x1="340" y1="624" x2="616" y2="624" stroke="#0284c7" stroke-width="1.5" marker-end="url(#ab)"/>
+  <text class="acct" x="478" y="606" text-anchor="middle" fill="#0369a1" font-size="10">location ^~ /media/ → UseStaticFiles</text>
+  <text class="acct" x="478" y="618" text-anchor="middle" fill="#0369a1" font-size="10">sirve el binario del volumen · anónimo, no es un endpoint</text>
+</svg>

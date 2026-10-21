@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img"
+     aria-label="Estructura interna de los repositorios: la documentación, la infraestructura y las herramientas de demostración a la izquierda, el servicio en el centro y el portal a la derecha, cada uno con sus directorios reales."
+     font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif">
+  <title>Estructura interna de los repositorios</title>
+  <desc>Árbol de directorios real, con las carpetas que importan y el recuento de cada una.</desc>
+  <defs>
+    <style>
+      .h, .m { font-family: Consolas, 'Courier New', ui-monospace, monospace; }
+      @media (prefers-color-scheme: dark) {
+        .card { fill: #0b1220; stroke: #1e293b; }
+        .h { fill: #e2e8f0; }
+        .m { fill: #cbd5e1; }
+        .s { fill: #94a3b8; }
+        .sep { stroke: #1e293b; }
+      }
+    </style>
+  </defs>
+
+  <rect class="card" x="0.5" y="0.5" width="999" height="499" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+  <line class="sep" x1="343" y1="28" x2="343" y2="472" stroke="#e2e8f0"/>
+  <line class="sep" x1="676" y1="28" x2="676" y2="472" stroke="#e2e8f0"/>
+  <text xml:space="preserve" class="h" x="22" y="44.0" fill="#0369a1" font-size="11" font-weight="600">simple-stock-flow-docs/</text>
+  <text class="s" x="332" y="44.0" text-anchor="end" fill="#64748b" font-size="9.5">la documentación</text>
+  <text xml:space="preserve" class="m" x="22" y="59.5" fill="#334155" font-size="11">├─ entregables/</text>
+  <text class="s" x="332" y="59.5" text-anchor="end" fill="#64748b" font-size="9.5">3 documentos, en .docx y .pdf</text>
+  <text xml:space="preserve" class="m" x="22" y="75.0" fill="#334155" font-size="11">│  ├─ arquitectura-simple-stock-flow-apa7.*</text>
+  <text xml:space="preserve" class="m" x="22" y="90.5" fill="#334155" font-size="11">│  ├─ manual-tecnico.*</text>
+  <text xml:space="preserve" class="m" x="22" y="106.0" fill="#334155" font-size="11">│  └─ manual-usuario.*</text>
+  <text xml:space="preserve" class="m" x="22" y="121.5" fill="#334155" font-size="11">├─ plantillas/</text>
+  <text class="s" x="332" y="121.5" text-anchor="end" fill="#64748b" font-size="9.5">fuente de los tres</text>
+  <text xml:space="preserve" class="m" x="22" y="137.0" fill="#334155" font-size="11">│  ├─ arquitectura-apa7/</text>
+  <text xml:space="preserve" class="m" x="22" y="152.5" fill="#334155" font-size="11">│  ├─ manual-tecnico/</text>
+  <text xml:space="preserve" class="m" x="22" y="168.0" fill="#334155" font-size="11">│  ├─ manual-usuario/</text>
+  <text xml:space="preserve" class="m" x="22" y="183.5" fill="#334155" font-size="11">│  └─ lib/</text>
+  <text class="s" x="332" y="183.5" text-anchor="end" fill="#64748b" font-size="9.5">formato común</text>
+  <text xml:space="preserve" class="m" x="22" y="199.0" fill="#334155" font-size="11">├─ diagramas/</text>
+  <text class="s" x="332" y="199.0" text-anchor="end" fill="#64748b" font-size="9.5">9 SVG</text>
+  <text xml:space="preserve" class="m" x="22" y="214.5" fill="#334155" font-size="11">└─ capturas/ · README.md</text>
+  <text xml:space="preserve" class="h" x="22" y="245.5" fill="#0369a1" font-size="11" font-weight="600">simple-stock-flow-infra/</text>
+  <text class="s" x="332" y="245.5" text-anchor="end" fill="#64748b" font-size="9.5">orquesta el conjunto</text>
+  <text xml:space="preserve" class="m" x="22" y="261.0" fill="#334155" font-size="11">├─ docker-compose.yml</text>
+  <text xml:space="preserve" class="m" x="22" y="276.5" fill="#334155" font-size="11">├─ docker-compose.dev.yml</text>
+  <text xml:space="preserve" class="m" x="22" y="292.0" fill="#334155" font-size="11">├─ .env.example</text>
+  <text class="s" x="332" y="292.0" text-anchor="end" fill="#64748b" font-size="9.5">.env ignorado</text>
+  <text xml:space="preserve" class="m" x="22" y="307.5" fill="#334155" font-size="11">├─ verify.sh</text>
+  <text xml:space="preserve" class="m" x="22" y="323.0" fill="#334155" font-size="11">└─ README.md</text>
+  <text xml:space="preserve" class="h" x="22" y="354.0" fill="#0369a1" font-size="11" font-weight="600">simple-stock-flow-tools/</text>
+  <text class="s" x="332" y="354.0" text-anchor="end" fill="#64748b" font-size="9.5">demostración · opcional</text>
+  <text xml:space="preserve" class="m" x="22" y="369.5" fill="#334155" font-size="11">├─ catalogue.py</text>
+  <text xml:space="preserve" class="m" x="22" y="385.0" fill="#334155" font-size="11">├─ seed.py</text>
+  <text class="s" x="332" y="385.0" text-anchor="end" fill="#64748b" font-size="9.5">siembra por HTTP</text>
+  <text xml:space="preserve" class="m" x="22" y="400.5" fill="#334155" font-size="11">├─ make_pictures.py</text>
+  <text xml:space="preserve" class="m" x="22" y="416.0" fill="#334155" font-size="11">├─ img/</text>
+  <text class="s" x="332" y="416.0" text-anchor="end" fill="#64748b" font-size="9.5">22 imágenes</text>
+  <text xml:space="preserve" class="m" x="22" y="431.5" fill="#334155" font-size="11">└─ README.md</text>
+  <text xml:space="preserve" class="h" x="355" y="44.0" fill="#0369a1" font-size="11" font-weight="600">simple-stock-flow-api/</text>
+  <text class="s" x="665" y="44.0" text-anchor="end" fill="#64748b" font-size="9.5">.NET 8 · 10 proyectos</text>
+  <text xml:space="preserve" class="m" x="355" y="59.5" fill="#334155" font-size="11">├─ src/</text>
+  <text xml:space="preserve" class="m" x="355" y="75.0" fill="#334155" font-size="11">│  ├─ domain/</text>
+  <text class="s" x="665" y="75.0" text-anchor="end" fill="#64748b" font-size="9.5">0 referencias</text>
+  <text xml:space="preserve" class="m" x="355" y="90.5" fill="#334155" font-size="11">│  │  ├─ Catalog/ · Sales/</text>
+  <text xml:space="preserve" class="m" x="355" y="106.0" fill="#334155" font-size="11">│  │  ├─ Identity/ · Common/</text>
+  <text xml:space="preserve" class="m" x="355" y="121.5" fill="#334155" font-size="11">│  │  └─ ValueObjects/</text>
+  <text xml:space="preserve" class="m" x="355" y="137.0" fill="#334155" font-size="11">│  ├─ application/</text>
+  <text xml:space="preserve" class="m" x="355" y="152.5" fill="#334155" font-size="11">│  │  ├─ Ports/Inbound/</text>
+  <text class="s" x="665" y="152.5" text-anchor="end" fill="#64748b" font-size="9.5">6</text>
+  <text xml:space="preserve" class="m" x="355" y="168.0" fill="#334155" font-size="11">│  │  ├─ Ports/Outbound/</text>
+  <text class="s" x="665" y="168.0" text-anchor="end" fill="#64748b" font-size="9.5">10</text>
+  <text xml:space="preserve" class="m" x="355" y="183.5" fill="#334155" font-size="11">│  │  ├─ Services/</text>
+  <text class="s" x="665" y="183.5" text-anchor="end" fill="#64748b" font-size="9.5">5</text>
+  <text xml:space="preserve" class="m" x="355" y="199.0" fill="#334155" font-size="11">│  │  └─ Common/</text>
+  <text class="s" x="665" y="199.0" text-anchor="end" fill="#64748b" font-size="9.5">5</text>
+  <text xml:space="preserve" class="m" x="355" y="214.5" fill="#334155" font-size="11">│  ├─ adapters/</text>
+  <text xml:space="preserve" class="m" x="355" y="230.0" fill="#334155" font-size="11">│  │  ├─ inbound/api/</text>
+  <text class="s" x="665" y="230.0" text-anchor="end" fill="#64748b" font-size="9.5">REST</text>
+  <text xml:space="preserve" class="m" x="355" y="245.5" fill="#334155" font-size="11">│  │  └─ outbound/</text>
+  <text xml:space="preserve" class="m" x="355" y="261.0" fill="#334155" font-size="11">│  │     ├─ persistence/</text>
+  <text class="s" x="665" y="261.0" text-anchor="end" fill="#64748b" font-size="9.5">9 migraciones</text>
+  <text xml:space="preserve" class="m" x="355" y="276.5" fill="#334155" font-size="11">│  │     ├─ security/</text>
+  <text class="s" x="665" y="276.5" text-anchor="end" fill="#64748b" font-size="9.5">JWT · PBKDF2</text>
+  <text xml:space="preserve" class="m" x="355" y="292.0" fill="#334155" font-size="11">│  │     └─ storage/</text>
+  <text class="s" x="665" y="292.0" text-anchor="end" fill="#64748b" font-size="9.5">binarios</text>
+  <text xml:space="preserve" class="m" x="355" y="307.5" fill="#334155" font-size="11">│  └─ bootstrap/</text>
+  <text xml:space="preserve" class="m" x="355" y="323.0" fill="#334155" font-size="11">│     ├─ Composition/</text>
+  <text class="s" x="665" y="323.0" text-anchor="end" fill="#64748b" font-size="9.5">PortBindings.cs</text>
+  <text xml:space="preserve" class="m" x="355" y="338.5" fill="#334155" font-size="11">│     └─ Program.cs</text>
+  <text xml:space="preserve" class="m" x="355" y="354.0" fill="#334155" font-size="11">├─ tests/</text>
+  <text xml:space="preserve" class="m" x="355" y="369.5" fill="#334155" font-size="11">│  ├─ Domain.UnitTests/</text>
+  <text class="s" x="665" y="369.5" text-anchor="end" fill="#64748b" font-size="9.5">sin dobles</text>
+  <text xml:space="preserve" class="m" x="355" y="385.0" fill="#334155" font-size="11">│  ├─ Application.UnitTests/</text>
+  <text class="s" x="665" y="385.0" text-anchor="end" fill="#64748b" font-size="9.5">con dobles</text>
+  <text xml:space="preserve" class="m" x="355" y="400.5" fill="#334155" font-size="11">│  └─ Adapters.IntegrationTests/</text>
+  <text class="s" x="665" y="400.5" text-anchor="end" fill="#64748b" font-size="9.5">motor real</text>
+  <text xml:space="preserve" class="m" x="355" y="416.0" fill="#334155" font-size="11">├─ Directory.Build.props</text>
+  <text class="s" x="665" y="416.0" text-anchor="end" fill="#64748b" font-size="9.5">una advertencia rompe</text>
+  <text xml:space="preserve" class="m" x="355" y="431.5" fill="#334155" font-size="11">├─ Dockerfile</text>
+  <text xml:space="preserve" class="m" x="355" y="447.0" fill="#334155" font-size="11">├─ SimpleStockFlow.sln</text>
+  <text class="s" x="665" y="447.0" text-anchor="end" fill="#64748b" font-size="9.5">10 proyectos</text>
+  <text xml:space="preserve" class="m" x="355" y="462.5" fill="#334155" font-size="11">└─ README.md</text>
+  <text xml:space="preserve" class="h" x="688" y="44.0" fill="#0369a1" font-size="11" font-weight="600">simple-stock-flow-portal/</text>
+  <text class="s" x="978" y="44.0" text-anchor="end" fill="#64748b" font-size="9.5">Angular 20</text>
+  <text xml:space="preserve" class="m" x="688" y="59.5" fill="#334155" font-size="11">├─ src/app/</text>
+  <text xml:space="preserve" class="m" x="688" y="75.0" fill="#334155" font-size="11">│  ├─ domain/</text>
+  <text class="s" x="978" y="75.0" text-anchor="end" fill="#64748b" font-size="9.5">sin Angular</text>
+  <text xml:space="preserve" class="m" x="688" y="90.5" fill="#334155" font-size="11">│  │  ├─ models/ · policies/</text>
+  <text xml:space="preserve" class="m" x="688" y="106.0" fill="#334155" font-size="11">│  │  └─ value-objects/</text>
+  <text xml:space="preserve" class="m" x="688" y="121.5" fill="#334155" font-size="11">│  ├─ application/</text>
+  <text xml:space="preserve" class="m" x="688" y="137.0" fill="#334155" font-size="11">│  │  ├─ ports/</text>
+  <text class="s" x="978" y="137.0" text-anchor="end" fill="#64748b" font-size="9.5">4</text>
+  <text xml:space="preserve" class="m" x="688" y="152.5" fill="#334155" font-size="11">│  │  ├─ use-cases/</text>
+  <text class="s" x="978" y="152.5" text-anchor="end" fill="#64748b" font-size="9.5">9</text>
+  <text xml:space="preserve" class="m" x="688" y="168.0" fill="#334155" font-size="11">│  │  └─ state/</text>
+  <text class="s" x="978" y="168.0" text-anchor="end" fill="#64748b" font-size="9.5">3 almacenes</text>
+  <text xml:space="preserve" class="m" x="688" y="183.5" fill="#334155" font-size="11">│  ├─ infrastructure/</text>
+  <text xml:space="preserve" class="m" x="688" y="199.0" fill="#334155" font-size="11">│  │  ├─ http/ · dto/</text>
+  <text class="s" x="978" y="199.0" text-anchor="end" fill="#64748b" font-size="9.5">api.dto.ts</text>
+  <text xml:space="preserve" class="m" x="688" y="214.5" fill="#334155" font-size="11">│  │  ├─ mappers/</text>
+  <text xml:space="preserve" class="m" x="688" y="230.0" fill="#334155" font-size="11">│  │  ├─ interceptors/</text>
+  <text class="s" x="978" y="230.0" text-anchor="end" fill="#64748b" font-size="9.5">token · errores</text>
+  <text xml:space="preserve" class="m" x="688" y="245.5" fill="#334155" font-size="11">│  │  └─ providers.ts</text>
+  <text class="s" x="978" y="245.5" text-anchor="end" fill="#64748b" font-size="9.5">composición</text>
+  <text xml:space="preserve" class="m" x="688" y="261.0" fill="#334155" font-size="11">│  ├─ presentation/</text>
+  <text xml:space="preserve" class="m" x="688" y="276.5" fill="#334155" font-size="11">│  │  ├─ features/</text>
+  <text class="s" x="978" y="276.5" text-anchor="end" fill="#64748b" font-size="9.5">5 dominios</text>
+  <text xml:space="preserve" class="m" x="688" y="292.0" fill="#334155" font-size="11">│  │  ├─ guards/</text>
+  <text class="s" x="978" y="292.0" text-anchor="end" fill="#64748b" font-size="9.5">sesión · admin</text>
+  <text xml:space="preserve" class="m" x="688" y="307.5" fill="#334155" font-size="11">│  │  └─ layout/ · shared/</text>
+  <text xml:space="preserve" class="m" x="688" y="323.0" fill="#334155" font-size="11">│  └─ app.routes.ts</text>
+  <text class="s" x="978" y="323.0" text-anchor="end" fill="#64748b" font-size="9.5">rutas en español</text>
+  <text xml:space="preserve" class="m" x="688" y="338.5" fill="#334155" font-size="11">├─ src/environments/</text>
+  <text xml:space="preserve" class="m" x="688" y="354.0" fill="#334155" font-size="11">├─ nginx.conf</text>
+  <text class="s" x="978" y="354.0" text-anchor="end" fill="#64748b" font-size="9.5">5 localizaciones</text>
+  <text xml:space="preserve" class="m" x="688" y="369.5" fill="#334155" font-size="11">├─ proxy.conf.json</text>
+  <text class="s" x="978" y="369.5" text-anchor="end" fill="#64748b" font-size="9.5">ng serve</text>
+  <text xml:space="preserve" class="m" x="688" y="385.0" fill="#334155" font-size="11">├─ Dockerfile</text>
+  <text class="s" x="978" y="385.0" text-anchor="end" fill="#64748b" font-size="9.5">node → nginx</text>
+  <text xml:space="preserve" class="m" x="688" y="400.5" fill="#334155" font-size="11">├─ angular.json</text>
+  <text xml:space="preserve" class="m" x="688" y="416.0" fill="#334155" font-size="11">└─ README.md</text>
+</svg>

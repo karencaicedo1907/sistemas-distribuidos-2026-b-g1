@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img"
+     aria-label="Topología: el navegador solo alcanza el portal por el puerto 8080; la API y la base viven dentro de la red de Docker y solo se publican con el solapamiento de desarrollo."
+     font-family="ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif">
+  <title>Topología de despliegue de Simple Stock Flow</title>
+  <desc>Tres contenedores en una red de Docker. El único puerto publicado en producción es el del portal.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+      <path class="ah" d="M0,0 L9,3.5 L0,7 z" fill="#475569"/>
+    </marker>
+    <marker id="ad" viewBox="0 0 9 7" refX="8" refY="3.5" markerWidth="8" markerHeight="7" orient="auto-start-reverse">
+      <path class="ahd" d="M0,0 L9,3.5 L0,7 z" fill="#b45309"/>
+    </marker>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        .card { fill: #0b1220; stroke: #1e293b; }
+        .zone { stroke: #475569; }
+        .box  { fill: #172033; stroke: #475569; }
+        .focus{ fill: #0c3a52; stroke: #38bdf8; }
+        .vol  { fill: #111a2b; stroke: #475569; }
+        .t    { fill: #e2e8f0; }
+        .s    { fill: #94a3b8; }
+        .lbl  { fill: #cbd5e1; }
+        .edge { stroke: #94a3b8; }
+        .dev  { stroke: #fbbf24; }
+        .warn { fill: #fbbf24; }
+        .ah   { fill: #94a3b8; }
+        .ahd  { fill: #fbbf24; }
+      }
+    </style>
+  </defs>
+
+  <rect class="card" x="0.5" y="0.5" width="999" height="559" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+
+  <rect class="zone" x="200" y="32" width="776" height="450" rx="14" fill="none" stroke="#94a3b8" stroke-dasharray="6 5"/>
+  <text class="s" x="216" y="54" fill="#475569" font-size="11">red docker · simple-stock-flow</text>
+
+  <rect class="box" x="24" y="100" width="120" height="92" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="84" y="140" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">Navegador</text>
+  <text class="s" x="84" y="160" text-anchor="middle" fill="#475569" font-size="10">localhost:8080</text>
+
+  <rect class="box" x="250" y="100" width="166" height="92" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="333" y="128" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">portal</text>
+  <text class="s" x="333" y="149" text-anchor="middle" fill="#475569" font-size="10">nginx 1.27-alpine</text>
+  <text class="s" x="333" y="166" text-anchor="middle" fill="#475569" font-size="10">el build de Angular</text>
+  <text class="s" x="333" y="181" text-anchor="middle" fill="#475569" font-size="10">y el proxy</text>
+
+  <rect class="focus" x="506" y="100" width="190" height="92" rx="8" fill="#e0f2fe" stroke="#0284c7"/>
+  <text class="t" x="601" y="128" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">service</text>
+  <text class="s" x="601" y="149" text-anchor="middle" fill="#475569" font-size="10">.NET 8 · Kestrel :8080</text>
+  <text class="s" x="601" y="166" text-anchor="middle" fill="#475569" font-size="10">crea el esquema</text>
+  <text class="s" x="601" y="181" text-anchor="middle" fill="#475569" font-size="10">al arrancar</text>
+
+  <rect class="box" x="786" y="100" width="154" height="92" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="863" y="128" text-anchor="middle" fill="#0f172a" font-size="13" font-weight="600">db</text>
+  <text class="s" x="863" y="149" text-anchor="middle" fill="#475569" font-size="10">postgres:16-alpine</text>
+  <text class="s" x="863" y="166" text-anchor="middle" fill="#475569" font-size="10">5432, sin salir</text>
+  <text class="s" x="863" y="181" text-anchor="middle" fill="#475569" font-size="10">de la red</text>
+
+  <line class="edge" x1="148" y1="146" x2="242" y2="146" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="195" y="128" text-anchor="middle" fill="#334155" font-size="10">HTTP · :8080 → 80</text>
+  <text class="lbl" x="195" y="141" text-anchor="middle" fill="#334155" font-size="10">el único publicado</text>
+
+  <line class="edge" x1="420" y1="146" x2="498" y2="146" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="459" y="128" text-anchor="middle" fill="#334155" font-size="10">proxy /api</text>
+  <text class="lbl" x="459" y="141" text-anchor="middle" fill="#334155" font-size="10">/media · /swagger</text>
+
+  <line class="edge" x1="700" y1="146" x2="778" y2="146" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="739" y="128" text-anchor="middle" fill="#334155" font-size="10">EF Core · Npgsql</text>
+  <text class="lbl" x="739" y="141" text-anchor="middle" fill="#334155" font-size="10">TCP 5432</text>
+
+  <path class="vol" d="M486,340 v56 a70,10 0 0 0 140,0 v-56" fill="#f8fafc" stroke="#94a3b8"/>
+  <ellipse class="vol" cx="556" cy="340" rx="70" ry="10" fill="#f8fafc" stroke="#94a3b8"/>
+  <text class="t" x="556" y="370" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">volumen media</text>
+  <text class="s" x="556" y="387" text-anchor="middle" fill="#475569" font-size="10">binarios subidos</text>
+
+  <path class="vol" d="M793,340 v56 a70,10 0 0 0 140,0 v-56" fill="#f8fafc" stroke="#94a3b8"/>
+  <ellipse class="vol" cx="863" cy="340" rx="70" ry="10" fill="#f8fafc" stroke="#94a3b8"/>
+  <text class="t" x="863" y="370" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">volumen pgdata</text>
+  <text class="s" x="863" y="387" text-anchor="middle" fill="#475569" font-size="10">datos del motor</text>
+
+  <line class="edge" x1="556" y1="196" x2="556" y2="326" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="566" y="252" fill="#334155" font-size="10">escribe y lee</text>
+  <text class="lbl" x="566" y="265" fill="#334155" font-size="10">los binarios</text>
+
+  <line class="edge" x1="863" y1="196" x2="863" y2="326" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <text class="lbl" x="873" y="258" fill="#334155" font-size="10">datos</text>
+
+  <rect class="box" x="24" y="408" width="150" height="70" rx="8" fill="#f1f5f9" stroke="#94a3b8"/>
+  <text class="t" x="99" y="428" text-anchor="middle" fill="#0f172a" font-size="12" font-weight="600">verify.sh · seed.py</text>
+  <text class="s" x="99" y="444" text-anchor="middle" fill="#475569" font-size="9">de simple-stock-flow-infra</text>
+  <text class="s" x="99" y="457" text-anchor="middle" fill="#475569" font-size="9">y de simple-stock-flow-tools,</text>
+  <text class="s" x="99" y="470" text-anchor="middle" fill="#475569" font-size="9">desde el anfitrión</text>
+
+  <polyline class="edge dev" points="178,443 676,443 676,196" fill="none" stroke="#b45309" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ad)"/>
+  <text class="warn" x="420" y="421" text-anchor="middle" fill="#b45309" font-size="10">:5000 → 8080 · y :5432 para la base</text>
+  <text class="warn" x="420" y="434" text-anchor="middle" fill="#b45309" font-size="10">solo con docker-compose.dev.yml</text>
+
+  <line class="edge" x1="232" y1="509" x2="272" y2="509" stroke="#475569" stroke-width="1.5"/>
+  <text class="s" x="280" y="513" fill="#475569" font-size="10.5">tráfico que existe siempre</text>
+  <line class="edge dev" x1="520" y1="509" x2="560" y2="509" stroke="#b45309" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text class="s" x="568" y="513" fill="#475569" font-size="10.5">solo con el solapamiento de desarrollo</text>
+</svg>
