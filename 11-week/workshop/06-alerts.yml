@@ -1,0 +1,38 @@
+groups:
+  - name: catalog-showtime-availability-burn-rate
+    rules:
+      # Budget: 0.5 % (SLO 99.5 % in 30 days). Burn rate 14.4 -> 7.2 %, burn rate 6 -> 3 %.
+      # "and ... >= 5" avoids paging with fewer than 5 requests in the window.
+      - alert: CatalogShowtimeAvailabilityFastBurn
+        expr: |
+          (
+            sum(rate(catalog_requests_total{route="/showtimes",outcome="error"}[1h]))
+              / sum(rate(catalog_requests_total{route="/showtimes"}[1h])) > (14.4 * 0.005)
+            and
+            sum(rate(catalog_requests_total{route="/showtimes",outcome="error"}[5m]))
+              / sum(rate(catalog_requests_total{route="/showtimes"}[5m])) > (14.4 * 0.005)
+          )
+          and sum(increase(catalog_requests_total{route="/showtimes"}[1h])) >= 5
+        labels:
+          severity: page
+          team: catalog
+        annotations:
+          summary: "POST /showtimes is spending the 30-day error budget 14.4 times too fast"
+          runbook_url: https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/blob/main/11-week/workshop/07-runbook.md
+
+      - alert: CatalogShowtimeAvailabilitySlowBurn
+        expr: |
+          (
+            sum(rate(catalog_requests_total{route="/showtimes",outcome="error"}[6h]))
+              / sum(rate(catalog_requests_total{route="/showtimes"}[6h])) > (6 * 0.005)
+            and
+            sum(rate(catalog_requests_total{route="/showtimes",outcome="error"}[30m]))
+              / sum(rate(catalog_requests_total{route="/showtimes"}[30m])) > (6 * 0.005)
+          )
+          and sum(increase(catalog_requests_total{route="/showtimes"}[6h])) >= 5
+        labels:
+          severity: ticket
+          team: catalog
+        annotations:
+          summary: "POST /showtimes is spending the 30-day error budget 6 times too fast"
+          runbook_url: https://github.com/karencaicedo1907/sistemas-distribuidos-2026-b-g1/blob/main/11-week/workshop/07-runbook.md
