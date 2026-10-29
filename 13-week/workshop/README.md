@@ -12,3 +12,9 @@
 - LIBRARY_RECORD_TIME: 2026-10-28 19:05
 - STORIES: https://github.com/code-corhuila/csp-docs/issues/287 https://github.com/code-corhuila/csp-docs/issues/288 https://github.com/code-corhuila/csp-docs/issues/289
 <!-- CONFIG-END -->
+
+## CP7 - Refined security backlog
+
+- Story #287 now names its dependency on csp-auth (it must issue `iss` and `aud` first) and is related to https://github.com/code-corhuila/csp-docs/issues/285 and https://github.com/code-corhuila/csp-docs/issues/291.
+- Stories #288 and #289 were checked against the issues of the other boundaries; no overlap found, so they stay as written.
+- Every story has its STRIDE letter, risk value, `security` and priority labels, the link to PR #286 and the Backlog column of the team board.
