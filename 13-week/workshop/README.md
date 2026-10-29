@@ -10,4 +10,5 @@
 - REFLECTION_DOC: https://docs.google.com/document/d/1vamzHa7fk9dxduzl3-g55HQ4cscvzR68_6XMvWDedxg/edit?usp=sharing
 - LIBRARY_BOOK: Antonio Angel Ramos Varon, Hacking y Seguridad de Paginas Web, edition not stated in the library copy, Ra-Ma, 2014, ISBN 9788499642956, call number 0011078
 - LIBRARY_RECORD_TIME: 2026-10-28 19:05
+- STORIES: https://github.com/code-corhuila/csp-docs/issues/287 https://github.com/code-corhuila/csp-docs/issues/288 https://github.com/code-corhuila/csp-docs/issues/289
 <!-- CONFIG-END -->
