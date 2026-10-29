@@ -1,0 +1,45 @@
+# Proposal for csp-catalog-api: security gates on every Pull Request (W13, CP4).
+# It lives in the fork folder on purpose; it is not active in the team repository.
+name: Security gates
+
+on:
+  pull_request:
+    branches: [develop, qa, main]
+
+permissions:
+  contents: read
+
+jobs:
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: OWASP dependency-check (fails on CVSS 7 or higher)
+        run: mvn -B org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=7
+
+  authz-negative-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Availability route rejects a token meant for another audience (story #287)
+        run: mvn -B -pl catalog-adapters -am test -Dtest=AvailabilityAuthorizationNegativeTest -Dsurefire.failIfNoSpecifiedTests=false
