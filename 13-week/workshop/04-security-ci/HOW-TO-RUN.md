@@ -41,4 +41,5 @@ Reading:
 ## Validation of `security.yml`
 
 - Syntax: loaded with a YAML parser, valid; jobs `secret-scan`, `dependency-audit` and `authz-negative-test`, trigger `pull_request` on `develop`, `qa` and `main`.
-- `actionlint` was not run (not installed on this machine). The workflow itself was not executed on GitHub Actions either.
+- `actionlint` (online playground, https://rhysd.github.io/actionlint/, v1.7.12) with the full content of `security.yml`: "Yay! No error was detected."
+- The workflow itself was not executed on GitHub Actions; it lives in the fork folder as a proposal.
