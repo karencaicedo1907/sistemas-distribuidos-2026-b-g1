@@ -22,4 +22,23 @@ mvn -B -pl catalog-adapters -am test -Dtest=AvailabilityAuthorizationNegativeTes
 
 ## Real console output
 
-Pending (CP8): paste here the output of the command above and the result of validating `security.yml`.
+Run on 2026-10-30 in a copy of `csp-catalog-api` at commit `1d0948c` (branch `develop`, Java 21, Maven 3.9.9), with the test file copied as step 1 says. The build failed, as expected:
+
+```text
+[INFO] Running co.edu.corhuila.csp.catalog.adapter.in.http.AvailabilityAuthorizationNegativeTest
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.384 s <<< FAILURE!
+[ERROR] AvailabilityAuthorizationNegativeTest.aBookingServiceTokenForAnotherAudienceIsUnauthorizedOnAvailability -- <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <401> but was: <200>
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0
+[INFO] BUILD FAILURE
+```
+
+Reading:
+
+- `aUserTokenWithShowtimeWriteIsForbiddenOnAvailability` passed: a user token gets 403.
+- `aBookingServiceTokenForAnotherAudienceIsUnauthorizedOnAvailability` failed with 200 instead of 401: today a token with `sub=booking-service` and `aud=payments-service` still reads availability. This confirms the gap of story #287 (the service does not require `aud`), and the test turns green when the story is done.
+
+## Validation of `security.yml`
+
+- Syntax: loaded with a YAML parser, valid; jobs `secret-scan`, `dependency-audit` and `authz-negative-test`, trigger `pull_request` on `develop`, `qa` and `main`.
+- `actionlint` was not run (not installed on this machine). The workflow itself was not executed on GitHub Actions either.
