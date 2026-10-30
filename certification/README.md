@@ -7,8 +7,8 @@
 | Full name | Karen Johana Caicedo Arias |
 | GitHub user | karencaicedo1907 |
 | Group | G1 |
-| Team | <Team name> |
-| Team -docs repository | <https://github.com/code-corhuila/...-docs> |
+| Team | CineSync Platform |
+| Team -docs repository | https://github.com/code-corhuila/csp-docs |
 | Course | HCCDP-Solution Architectures Course |
 | Course link | https://e.huawei.com/en/talent/ict-academy/#/ict-courses-detail?courseId=6WtKiPd1S1YelBB0AUbE1vXlPgk |
 | Start date | 2026-10-30 |
