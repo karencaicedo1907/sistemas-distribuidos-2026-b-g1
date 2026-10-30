@@ -4,15 +4,24 @@ Story covered: csp-docs#287 `[security] Reject service tokens that are not issue
 (STRIDE S, risk 6). Acceptance criterion 1: a valid RS256 token with `sub=booking-service` but a wrong
 audience is rejected with 401 on `GET /showtimes/{showtimeId}/availability`.
 
-## Run it locally
+## Run it locally (Windows, PowerShell)
 
-1. Copy `AvailabilityAuthorizationNegativeTest.java` to
-   `csp-catalog-api/catalog-adapters/src/test/java/co/edu/corhuila/csp/catalog/adapter/in/http/`.
-2. From the root of `csp-catalog-api`:
+1. From the root of `csp-catalog-api`, copy the test next to the other HTTP adapter tests
+   (adjust the source path to where this folder lives on your machine):
 
-```bash
-mvn -B -pl catalog-adapters -am test -Dtest=AvailabilityAuthorizationNegativeTest -Dsurefire.failIfNoSpecifiedTests=false
+```powershell
+$dest = "catalog-adapters\src\test\java\co\edu\corhuila\csp\catalog\adapter\in\http"
+New-Item -ItemType Directory -Force $dest | Out-Null
+Copy-Item "<path-to-this-folder>\AvailabilityAuthorizationNegativeTest.java" $dest
 ```
+
+2. Still in the root of `csp-catalog-api`:
+
+```powershell
+mvn -B -pl catalog-adapters -am test "-Dtest=AvailabilityAuthorizationNegativeTest" "-Dsurefire.failIfNoSpecifiedTests=false"
+```
+
+Requirements: JDK 21 and Maven 3.9 in the `PATH` (check with `java -version` and `mvn -v`). The `-D` options are quoted so PowerShell passes them unchanged. The same `mvn` line works in Git Bash or cmd without the quotes. In CI the job runs on `ubuntu-latest`, which is why `security.yml` uses Linux there.
 
 ## What to expect
 
