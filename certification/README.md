@@ -40,7 +40,7 @@
 
 | Evidence file | Lab name | What I built | What failed first and how I fixed it |
 |---|---|---|---|
-| evidence/15-lab-1.png | <Lab name> | <One sentence> | <One sentence> |
+| evidence/15-lab-1.png | Cloud Computing and Storage | Deployed a Discuz! forum architecture by creating image `img-db` from `ecs-db` to launch `ecs-db-img`, provisioning `ecs-web` with an OBS script linked to the database, and mounting the SFS Turbo system `sfs-turbo-test` at `/mnt/sfs_turbo`. | I corrected the `ecs-web` billing to Pay-per-use and the flavor to `s6.large.2` before submitting, and I resubmitted the SFS creation form after missing the first Create Now click, then mounted it with the console command. |
 | evidence/16-lab-2.png | <Lab name> | <One sentence> | <One sentence> |
 | evidence/17-lab-3.png | <Lab name> | <One sentence> | <One sentence> |
 | evidence/18-lab-4.png | <Lab name> | <One sentence> | <One sentence> |
