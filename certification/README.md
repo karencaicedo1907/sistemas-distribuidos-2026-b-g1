@@ -35,7 +35,8 @@
 | 2026-11-07 | 4.00 | Chapter 14 | evidence/14-chapter-14.png |
 | 2026-11-08 | 1.52 | Lab 1: Cloud Computing and Storage | evidence/15-lab-1.png |
 | 2026-11-09 | 1.33 | Lab 2: High-Performance Network Solution | evidence/16-lab-2.png |
-| Total | 44.44 | | |
+| 2026-11-11 | 1.32 | Lab 3: Highly Elastic Service System | evidence/17-lab-3.png |
+| Total | 45.76 | | |
 
 ## Labs
 
