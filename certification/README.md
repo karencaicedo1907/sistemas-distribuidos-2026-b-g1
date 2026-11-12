@@ -44,7 +44,7 @@
 |---|---|---|---|
 | evidence/15-lab-1.png | Cloud Computing and Storage | Deployed a Discuz! forum architecture by creating image `img-db` from `ecs-db` to launch `ecs-db-img`, provisioning `ecs-web` with an OBS script linked to the database, and mounting the SFS Turbo system `sfs-turbo-test` at `/mnt/sfs_turbo`. | I corrected the `ecs-web` billing to Pay-per-use and the flavor to `s6.large.2` before submitting, and I resubmitted the SFS creation form after missing the first Create Now click, then mounted it with the console command. |
 | evidence/16-lab-2.png | High-Performance Network Solution | I deployed a Discuz! network architecture with an RDS database in `subnet-db`, connected `vpc-web` to `vpc-om` via VPC Peering, enabled internet access for `ecs-web` through a NAT gateway with SNAT/DNAT rules, and created the private DNS zone `www.abc.com` resolving to `192.168.1.198`. | When the `ecs-om` terminal disconnected due to a "Client timeout", I reconnected via VNC Login and repeated the ping tests. |
-| evidence/17-lab-3.png | <Lab name> | <One sentence> | <One sentence> |
+| evidence/17-lab-3.png | Highly Elastic Service System | I deployed an elastic Discuz! service using an RDS database, an ELB with a TCP/80 listener, and the `as-group-web` auto-scaling group (min 1, desired 2, max 5) created from the `image-web` image of `ecs-web`, configured with CPU-based scaling and ELB EIP bandwidth policies. | When creating the auto-scaling configuration, the private image dropdown appeared empty because `image-web` was still building, so I reopened the form once its status changed to Normal. |
 | evidence/18-lab-4.png | <Lab name> | <One sentence> | <One sentence> |
 
 ## Final exam
