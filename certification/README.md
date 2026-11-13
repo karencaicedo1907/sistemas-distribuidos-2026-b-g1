@@ -37,7 +37,8 @@
 | 2026-11-09 | 1.33 | Lab 2: High-Performance Network Solution | evidence/16-lab-2.png |
 | 2026-11-11 | 1.32 | Lab 3: Highly Elastic Service System | evidence/17-lab-3.png |
 | 2026-11-13 | 1.12 | Lab 4: Highly Reliable Database Solution | evidence/18-lab-4.png |
-| Total | 46.88 | | |
+| 2026-11-13 | 0.26 | Final exam: HCCDP-Solution Architectures Course Mock Exam (15 min 42 s) | evidence/19-final-exam.png |
+| Total | 47.14 | | |
 
 ## Labs
 
@@ -50,8 +51,8 @@
 
 ## Final exam
 
-- Score: <score>
-- Date: <YYYY-MM-DD>
+- Score: 79/100 (passed, 24/30 correct)
+- Date: 2026-11-13
 - Evidence: evidence/19-final-exam.png
 
 ## Skills summary
