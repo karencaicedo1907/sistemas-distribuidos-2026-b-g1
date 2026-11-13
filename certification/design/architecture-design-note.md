@@ -64,7 +64,7 @@ The Standby is already synchronized with the Primary, so there is no need to res
 
 PITR helps recover the database with a maximum data loss of 5 minutes because Huawei Cloud RDS for PostgreSQL supports incremental backups every 5 minutes.
 
-A seat hold lasts 10 minutes and the customer can try again, so an RPO of zero is not necessary. Losing five minutes of data means losing the latest reservations, which may be acceptable for a cinema. This plan does not cover MongoDB, Redis or RustFS, and the backups and failover have not been tested.
+A seat hold lasts 10 minutes by default and the customer can try again, so an RPO of zero is not necessary. Losing five minutes of data means losing the latest reservations, which may be acceptable for a cinema. This plan does not cover MongoDB, Redis or RustFS, and the backups and failover have not been tested.
 
 ## 5. Automated deployment
 
