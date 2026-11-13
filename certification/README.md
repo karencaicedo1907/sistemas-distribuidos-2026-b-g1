@@ -57,4 +57,9 @@
 
 ## Skills summary
 
-<5 to 7 lines in English, first person, naming at least three concrete design techniques from the course.>
+I learned to design a system in two availability zones and use an ELB to improve availability.
+I learned to use Auto Scaling with CPU alarms and minimum and maximum instances.
+I learned how a Primary and Standby database in different zones can help recover data.
+I learned to use RTO, RPO and PITR to plan database recovery.
+I applied reliability, security, performance, cost and operations principles to the CineSync design.
+I learned that high availability also depends on the database and storage, not only on the services.
