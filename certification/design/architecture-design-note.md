@@ -4,6 +4,8 @@
 
 ![Target architecture](target-architecture.png)
 
+The Gateway, Booking, Catalog and Ticketing run in both zones, with one instance in each zone. Auth, Concessions, Workflow, Worker and the Shell are shown only once. PostgreSQL has the Primary in one zone and the Standby in the other. One limitation is that MongoDB, Redis and RustFS are only in Zone A, so if this zone fails, Catalog, Auth and PDF storage may lose access to their data.
+
 | Component | Role | File in `csp-docs` |
 |---|---|---|
 | API Gateway | Receives all the requests on port 8000 and sends them to the correct service. | `09-microservices/services/01-api-gateway/` |
@@ -32,6 +34,12 @@
 | **Cost** | According to ADR-006, each environment has its own database, so dev and QA cost almost the same as production. | `ADR-006-environment-level-database-instances.md` (Decision, point 1) | Use smaller databases in dev and QA, and use Standby only in production. | Cost Center |
 | **Operations** | The outbox relay runs with only one instance and without a lock. | `15-project-control/risks.md` (R-006, line 49) and `open-questions.md` (Q-005) | Use one instance, alerts for backlog and DLQ, and an inbox to ignore duplicate events. | Cloud Eye and LTS |
 
+Reliability: With two Catalog instances, the ELB sends requests to the instance that responds. If Catalog does not respond, Booking returns `503` (ADR-020) and does not create an incomplete reservation. Confirmations and reads do not need Catalog, so they can continue working.
+
+Security: Each service has its own secret and uses a one-hour token, so a stolen token causes less damage and expires quickly. These two decisions address specific weaknesses in the current design, not just general improvements.
+
+Performance efficiency: k6 tests in QA will help check how the services work under load before the first release.
+
 ## 3. Scalability
 
 | Service | Metric | Threshold | Minimum instances | Maximum instances |
@@ -39,9 +47,7 @@
 | **Booking & Seat Reservation Service** | Average CPU | 70% for 5 minutes | 2 | 6 |
 | **Ticketing & Fulfillment Service** | Average CPU | 70% for 5 minutes | 2 | 4 |
 
-Booking needs more resources when many people try to book seats, for example, during a movie release. Ticketing needs more resources when many events are waiting because processing these events uses more CPU.
-
-The minimum is 2 instances because there are two availability zones. The maximum for Booking is 6 because more instances also mean more connections to PostgreSQL. These numbers are my design proposal.
+Booking needs more CPU when many users try to reserve seats, for example, during a movie release. Ticketing needs more CPU when it processes many events and creates tickets. The 70% limit leaves time for new instances to start, and the five-minute period helps avoid scaling because of short traffic peaks. The minimum is two instances because there are two availability zones. Booking has a maximum of six because more instances also use more PostgreSQL connections. If a service reaches its maximum, it may become slower and an alert would be needed. These numbers are my proposal and have not been tested with load tests (Q-008).
 
 Huawei Auto Scaling will add or remove instances using alarms.
 
@@ -58,6 +64,8 @@ The Standby is already synchronized with the Primary, so there is no need to res
 
 PITR helps recover the database with a maximum data loss of 5 minutes because Huawei Cloud RDS for PostgreSQL supports incremental backups every 5 minutes.
 
+A seat hold lasts 10 minutes and the customer can try again, so an RPO of zero is not necessary. Losing five minutes of data means losing the latest reservations, which may be acceptable for a cinema. This plan does not cover MongoDB, Redis or RustFS, and the backups and failover have not been tested.
+
 ## 5. Automated deployment
 
 | Stage | Trigger | Tool or service | File in your team's repositories |
@@ -69,9 +77,9 @@ PITR helps recover the database with a maximum data loss of 5 minutes because Hu
 | **Deploy to production** | Manual approval and promotion from `qa` to `main` | `kubectl rollout` | `csp-docs/10-devops/ci-cd.md` |
 | **Rollback** | A check fails after production deployment | `kubectl rollout undo` | `csp-docs/10-devops/ci-cd.md` |
 
-Build and test are already implemented. The image is built but it is not published. QA, production and rollback are still part of the design.
+Build and test are already implemented. The image is built but it is not published to a container registry. Deployment to QA and production still needs to be automated. Rollback is only described in the documentation.
 
 ## 6. Decisions
 
-- [ADR-C3-01](ADR-C3-01.md): `csp-auth` creates the service tokens, so a person does not sign them by hand.
-- [ADR-C3-02](ADR-C3-02.md): Booking uses a Primary and a Standby in two zones, plus PITR, to recover its reservations.
+- [ADR-C3-01](ADR-C3-01.md): `csp-auth` creates the service tokens, so a person does not sign them by hand. Each service has its own secret and short-lived tokens, so one secret can be changed without affecting all services.
+- [ADR-C3-02](ADR-C3-02.md): Booking uses a Primary and a Standby in two zones, plus PITR, to recover its reservations. The Standby helps reduce recovery time, and PITR helps recover data after an error.
