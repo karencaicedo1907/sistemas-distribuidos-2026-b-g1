@@ -6,21 +6,21 @@
 
 | Component | Role | File in `csp-docs` |
 |---|---|---|
-| API Gateway | NGINX, single entry on port 8000 | `09-microservices/services/01-api-gateway/` |
-| Auth & User Service | Accounts and JWT (Go, PostgreSQL `auth`) | `09-microservices/services/02-auth-service/` |
-| Catalog & Showtimes Service | Movies, rooms, showtimes (Spring Boot, MongoDB `catalog_db`) | `09-microservices/services/03-catalog-service/` |
-| Booking & Seat Reservation Service | Holds and reservations (PostgreSQL `booking`) | `09-microservices/services/04-booking-service/` |
-| Concessions / Snack Bar Service | Products and orders (PostgreSQL `concessions`) | `09-microservices/services/06-concessions-service/` |
-| Ticketing & Fulfillment Service | Ticket, PDF and email (PostgreSQL `ticketing_fulfillment`) | `09-microservices/services/05-ticketing-fulfillment-service/` |
-| RabbitMQ | Broker of the domain events | `05-architecture/decisions/records/ADR-036-rabbitmq-instance-for-the-domain-events.md` |
-| Redis | State of Auth | `05-architecture/decisions/records/ADR-028-redis-instance-for-the-auth-state.md` |
-| `csp-worker` | Outbox relay and background jobs | `05-architecture/decisions/records/ADR-019-outbox-relay-read-only-for-other-domains.md` |
-| `csp-workflow` | Saga `book-seats` | `05-architecture/decisions/records/ADR-065-workflow-saga-state-in-postgresql.md` |
-| RustFS | Private storage of the ticket PDF | `05-architecture/decisions/records/ADR-058-object-storage-for-the-ticket-pdf-rustfs.md` |
-| Angular shell and portals | Web client with Native Federation | `05-architecture/decisions/records/ADR-022-front-end-angular-native-federation.md` |
-| SMTP server | Sends the emails of Ticketing | `05-architecture/overview.md` (container diagram) |
-| PostgreSQL | One instance per environment, with the schemas `auth`, `booking`, `concessions`, `ticketing_fulfillment` and `workflow` | `05-architecture/decisions/records/ADR-006-environment-level-database-instances.md` and `ADR-065-workflow-saga-state-in-postgresql.md` (schema `workflow`) |
-| MongoDB `catalog_db` | Documents of Catalog (movies, rooms, showtimes) | `05-architecture/decisions/records/ADR-003-polyglot-persistence-strategy.md` |
+| API Gateway | Receives all the requests on port 8000 and sends them to the correct service. | `09-microservices/services/01-api-gateway/` |
+| Auth & User Service | Manages user accounts and JWT tokens. It uses Go and PostgreSQL. | `09-microservices/services/02-auth-service/` |
+| Catalog & Showtimes Service | Manages movies, rooms and showtimes. It uses Spring Boot and MongoDB. | `09-microservices/services/03-catalog-service/` |
+| Booking & Seat Reservation Service | Manages seat holds and reservations. It uses PostgreSQL. | `09-microservices/services/04-booking-service/` |
+| Concessions / Snack Bar Service | Manages products and snack orders. It uses PostgreSQL. | `09-microservices/services/06-concessions-service/` |
+| Ticketing & Fulfillment Service | Creates tickets, PDF files and sends emails. It uses PostgreSQL. | `09-microservices/services/05-ticketing-fulfillment-service/` |
+| RabbitMQ | Sends messages between services when events happen. | `05-architecture/decisions/records/ADR-036-rabbitmq-instance-for-the-domain-events.md` |
+| Redis | Stores temporary data used by Auth. | `05-architecture/decisions/records/ADR-028-redis-instance-for-the-auth-state.md` |
+| `csp-worker` | Checks the outbox and runs background tasks. | `05-architecture/decisions/records/ADR-019-outbox-relay-read-only-for-other-domains.md` |
+| `csp-workflow` | Manages the steps of the book-seats process. | `05-architecture/decisions/records/ADR-065-workflow-saga-state-in-postgresql.md` |
+| RustFS | Stores ticket PDF files in private storage. | `05-architecture/decisions/records/ADR-058-object-storage-for-the-ticket-pdf-rustfs.md` |
+| Angular shell and portals | Provides the web pages that users use to access the system. | `05-architecture/decisions/records/ADR-022-front-end-angular-native-federation.md` |
+| SMTP server | Sends emails from Ticketing. | `05-architecture/overview.md` (container diagram) |
+| PostgreSQL | Stores data for Auth, Booking, Concessions, Ticketing and Workflow. Each environment has its own database instance. | `05-architecture/decisions/records/ADR-006-environment-level-database-instances.md` and `ADR-065-workflow-saga-state-in-postgresql.md` (schema `workflow`) |
+| MongoDB `catalog_db` | Stores Catalog data, like movies, rooms and showtimes. | `05-architecture/decisions/records/ADR-003-polyglot-persistence-strategy.md` |
 
 ## 2. Five principles
 
