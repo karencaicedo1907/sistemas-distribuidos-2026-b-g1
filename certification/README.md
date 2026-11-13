@@ -12,7 +12,7 @@
 | Course | HCCDP-Solution Architectures Course |
 | Course link | https://e.huawei.com/en/talent/ict-academy/#/ict-courses-detail?courseId=6WtKiPd1S1YelBB0AUbE1vXlPgk |
 | Start date | 2026-10-30 |
-| Completion date | <YYYY-MM-DD> |
+| Completion date | 2026-11-13 |
 
 ## Study log
 
