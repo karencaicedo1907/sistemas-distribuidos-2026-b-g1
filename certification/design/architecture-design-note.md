@@ -34,11 +34,15 @@ The Gateway, Booking, Catalog and Ticketing run in both zones, with one instance
 | **Cost** | According to ADR-006, each environment has its own database, so dev and QA cost almost the same as production. | `ADR-006-environment-level-database-instances.md` (Decision, point 1) | Use smaller databases in dev and QA, and use Standby only in production. | Cost Center |
 | **Operations** | The outbox relay runs with only one instance and without a lock. | `15-project-control/risks.md` (R-006, line 49) and `open-questions.md` (Q-005) | Use one instance, alerts for backlog and DLQ, and an inbox to ignore duplicate events. | Cloud Eye and LTS |
 
-Reliability: With two Catalog instances, the ELB sends requests to the instance that responds. If Catalog does not respond, Booking returns `503` (ADR-020) and does not create an incomplete reservation. Confirmations and reads do not need Catalog, so they can continue working.
+Reliability: With two Catalog instances, the ELB uses health checks to identify healthy instances and sends requests to them. If Catalog does not respond, Booking returns `503` (ADR-020) and does not create an incomplete reservation. Confirmations and reads do not need Catalog, so they can continue working.
 
-Security: Each service has its own secret and uses a one-hour token, so a stolen token causes less damage and expires quickly. These two decisions address specific weaknesses in the current design, not just general improvements.
+Security: Today, if someone steals a 90-day token, they can use it for up to 90 days. With a one-hour token, the attacker has much less time. Each service also has its own secret, so one secret can be changed without affecting the other services.
 
-Performance efficiency: k6 tests in QA will help check how the services work under load before the first release.
+Performance efficiency: In the k6 tests, I would check the p95 latency of Booking, the error rate and the CPU. If latency or errors increase while CPU is still below 70%, I would review the threshold in Section 3 and consider lowering it.
+
+Cost: Dev and QA do not need the same database size as production, so they can use smaller databases. Only production has a Standby. The disadvantage is that failover cannot be tested in dev or QA with this design.
+
+Operations: The outbox relay uses one instance, so it is a single point of failure. Alerts for backlog and DLQ help detect problems, and the inbox helps ignore duplicate events.
 
 ## 3. Scalability
 
@@ -78,6 +82,8 @@ A seat hold lasts 10 minutes by default and the customer can try again, so an RP
 | **Rollback** | A check fails after production deployment | `kubectl rollout undo` | `csp-docs/10-devops/ci-cd.md` |
 
 Build and test are already implemented. The image is built but it is not published to a container registry. Deployment to QA and production still needs to be automated. Rollback is only described in the documentation.
+
+Without automatic deployment, a person must deploy by hand, so mistakes are possible and QA may be different from production. The image is not in a registry, so it is not possible to redeploy a known version easily. The rollback has not been tested.
 
 ## 6. Decisions
 
