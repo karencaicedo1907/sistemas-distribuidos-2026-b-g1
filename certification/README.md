@@ -39,7 +39,8 @@
 | 2026-11-13 | 1.12 | Lab 4: Highly Reliable Database Solution | evidence/18-lab-4.png |
 | 2026-11-13 | 0.26 | Final exam: HCCDP-Solution Architectures Course Mock Exam | evidence/19-final-exam.png |
 | 2026-11-13 | 2.25 | Design note, ADR-C3-01, ADR-C3-02, target architecture diagram, certificate and Moodle submission | design/architecture-design-note.md |
-| Total | 49.39 | | |
+| 2026-11-14 | 2.38 | Design note expansion: reasoning for the five principles and the deployment risks, and review of the Huawei Cloud service names | design/architecture-design-note.md |
+| Total | 51.77 | | |
 
 ## Labs
 
